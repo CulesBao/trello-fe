@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_DATABASE=trello
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - trello-network
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - trello-network
+
+  trello:
+    depends_on:
+      - db
+      - redis
+    image: baocules/trello:latest
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - trello-network
+networks:
+  trello-network:
+    driver: bridge
