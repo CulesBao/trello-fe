@@ -13,14 +13,13 @@ export interface User extends BaseEntity {
 }
 
 export interface UserProfile {
+  id: string
+  name: string
   email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  avatar?: string;
-  bio?: string;
-  phone?: string;
-  timezone?: string;
+  phoneNumber?: string;
+  birthdate?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface CreateUserRequest {

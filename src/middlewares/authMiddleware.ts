@@ -8,7 +8,7 @@ export function authMiddleware(to: any, from: any, next: any) {
     return next('/login')
   }
 
-  if (to.meta.layout === 'auth' && isLoggedIn.value) {
+  if (to.meta.isAuthLayout && isLoggedIn.value) {
     return next('/')
   }
 

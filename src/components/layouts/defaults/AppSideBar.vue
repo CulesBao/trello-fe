@@ -17,6 +17,8 @@ import NavMain from '@/components/layouts/defaults/NavMain.vue'
 import NavProjects from '@/components/layouts/defaults/NavProjects.vue'
 import NavUser from '@/components/layouts/defaults/NavUser.vue'
 import TeamSwitcher from '@/components/layouts/defaults/TeamSwitcher.vue'
+import { UserService } from '@/api';
+import { useUserStore } from '@/stores/user';
 
 import {
   Sidebar,
@@ -29,14 +31,16 @@ import {
 const props = withDefaults(defineProps<SidebarProps>(), {
   collapsible: 'icon',
 })
+const userStore = useUserStore()
+onMounted(async() => {
+  await UserService.getMyProfile()
+})
+onUnmounted(() => {
+
+})
 
 // This is sample data.
 const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
   teams: [
     {
       name: 'Acme Inc',
@@ -171,7 +175,7 @@ const data = {
       <NavProjects :projects="data.projects" />
     </SidebarContent>
     <SidebarFooter>
-      <NavUser :user="data.user" />
+      <NavUser :user="{ name: userStore.user?.name || 'Anonymous', email: userStore.user?.email || 'No Email', avatar: userStore.getShortName() }" />
     </SidebarFooter>
     <SidebarRail />
   </Sidebar>

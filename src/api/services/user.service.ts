@@ -4,8 +4,10 @@ import type {
   User,
   CreateUserRequest,
   UpdateUserRequest,
+  UserProfile,
 } from '../types/user';
 import type { ApiResponse } from '../types/common';
+import { useUserStore } from '@/stores/user';
 
 export class UserService {
   /**
@@ -15,6 +17,14 @@ export class UserService {
     const response = await $get<ApiResponse<User[]>>(
       API_ENDPOINTS.USERS.LIST
     );
+    return response.data.data;
+  }
+  static async getMyProfile(): Promise<UserProfile> {
+    const response = await $get<ApiResponse<UserProfile>>(
+      API_ENDPOINTS.USERS.DETAIL('')
+    );
+    const userStoreInstance = useUserStore();
+    userStoreInstance.setUser(response.data.data);
     return response.data.data;
   }
 

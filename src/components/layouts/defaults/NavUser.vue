@@ -28,14 +28,17 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
+import { useAuthStore } from '@/stores/auth';
 
-const props = defineProps<{
+defineProps<{
   user: {
     name: string
     email: string
     avatar: string
   }
 }>()
+
+const authStore = useAuthStore()
 
 const { isMobile } = useSidebar()
 </script>
@@ -50,9 +53,8 @@ const { isMobile } = useSidebar()
             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
             <Avatar class="h-8 w-8 rounded-lg">
-              <AvatarImage :src="user.avatar" :alt="user.name" />
               <AvatarFallback class="rounded-lg">
-                CN
+                {{ user.avatar }}
               </AvatarFallback>
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
@@ -105,7 +107,7 @@ const { isMobile } = useSidebar()
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem @click="authStore.logout()">
             <LogOut />
             Log out
           </DropdownMenuItem>

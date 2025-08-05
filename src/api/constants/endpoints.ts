@@ -5,7 +5,6 @@ export const API_ENDPOINTS = {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     LOGOUT: '/auth/logout',
-    PROFILE: '/auth/profile',
     UPDATE_PROFILE: '/auth/profile',
     CHANGE_PASSWORD: '/auth/change-password',
     FORGOT_PASSWORD: '/auth/forgot-password',
@@ -15,7 +14,7 @@ export const API_ENDPOINTS = {
   // User Management
   USERS: {
     LIST: '/users',
-    DETAIL: (id: string) => `/users/${id}`,
+    DETAIL: (id: string) => `/user/${id}`,
     CREATE: '/users',
     UPDATE: (id: string) => `/users/${id}`,
     DELETE: (id: string) => `/users/${id}`,

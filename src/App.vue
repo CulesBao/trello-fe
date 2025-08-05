@@ -2,7 +2,6 @@
   import AuthLayout from '@/layouts/auth.vue';
   import DefaultLayout from '@/layouts/default.vue';
   import ErrorBounder from '@/components/ErrorBounder.vue';
-  import Copyright from '@/components/Copyright.vue';
 
   const routes = useRoute()
 
@@ -18,5 +17,4 @@
       <router-view />
     </component>
   </ErrorBounder>
-  <Copyright />
 </template>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { authMiddleware } from '@/middlewares/authMiddleware'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [{
@@ -6,7 +7,6 @@ const router = createRouter({
     name: 'Home',
     component: () => import('@/views/Home.vue'),
     meta: {
-      isAuthLayout: false,
       requireAuth: true
     }
   }, {
@@ -23,8 +23,18 @@ const router = createRouter({
     meta: {
       isAuthLayout: true
     }
-  }],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'error',
+    component: () => import('../views/Error.vue'),
+    meta: {
+      isErrorLayout: true
+    }
+  },],
 
 })
+
+router.beforeEach(authMiddleware)
 
 export default router

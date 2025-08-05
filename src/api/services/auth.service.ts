@@ -1,4 +1,4 @@
-import { $get, $post, $put } from '../axios.client';
+import { $post, $put } from '../axios.client';
 import { API_ENDPOINTS } from '../constants/endpoints';
 import type {
   LoginRequest,
@@ -8,7 +8,7 @@ import type {
   ResetPasswordRequest,
 } from '../types/auth';
 import type { UserProfile, ChangePasswordRequest } from '../types/user';
-import type { ApiResponse } from '../types/common';
+import type { ApiResponse } from '../types/common'
 
 export class AuthService {
   /**
@@ -19,8 +19,8 @@ export class AuthService {
       API_ENDPOINTS.AUTH.LOGIN,
       data,
     );
-    console.log('Login response:', response);
     localStorage.setItem('accessToken', JSON.stringify(response.data.data.token));
+    window.location.replace('/');
     return response.data.data;
   }
 
@@ -31,15 +31,6 @@ export class AuthService {
     const response = await $post<ApiResponse<AuthResponse>>(
       API_ENDPOINTS.AUTH.REGISTER,
       data,
-    );
-    return response.data.data;
-  }
-  /**
-   * Lấy thông tin profile người dùng
-   */
-  static async getProfile(): Promise<UserProfile> {
-    const response = await $get<ApiResponse<UserProfile>>(
-      API_ENDPOINTS.AUTH.PROFILE
     );
     return response.data.data;
   }
