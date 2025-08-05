@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios'
-import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const axiosClient = axios.create({
@@ -30,20 +29,6 @@ axiosClient.interceptors.response.use(
       localStorage.removeItem('refreshToken')
       window.location.href = '/login'
     }
-    console.log('Axios error:', resp)
-    const respErrorMessage = resp?.data?.details?.message ?? 'Unknown error occurred'
-
-    // Show toast notification for errors (except 401 which redirects)
-    if (respErrorCode !== 401) {
-      toast.error(respErrorMessage, {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-      })
-    }
-
     // Return the original axios error instead of creating new Error
     return Promise.reject(error)
   }
@@ -52,19 +37,9 @@ axiosClient.interceptors.response.use(
 function $post<T = any, R = AxiosResponse<T>, D = any>(
   url: string,
   data?: D,
-  message?: string,
   config?: AxiosRequestConfig<D>
 ): Promise<R> {
   const response = axiosClient.post<T, R>(url, data, config)
-  if (message) {
-    toast.success(message, {
-      position: 'top-right',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-    })
-  }
   return response
 }
 

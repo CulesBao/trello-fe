@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import AuthLayout from '@/layouts/auth.vue';
   import DefaultLayout from '@/layouts/default.vue';
+  import ErrorBounder from '@/components/ErrorBounder.vue';
+  import Copyright from '@/components/Copyright.vue';
 
   const routes = useRoute()
 
@@ -11,6 +13,10 @@
 
 
 <template>
+  <ErrorBounder>
   <component :is="layout">
-  </component>
+      <router-view />
+    </component>
+  </ErrorBounder>
+  <Copyright />
 </template>

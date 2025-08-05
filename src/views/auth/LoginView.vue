@@ -18,11 +18,11 @@ import {
 } from '@/components/ui/form'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
-import { $post } from '@/api'
+import { AuthService } from '@/api'
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters').max(100),
+  password: z.string().min(5, 'Password must be at least 5 characters').max(100, 'Password must be less than 100 characters'),
 })
 
 const validationSchema = toTypedSchema(formSchema)
@@ -30,7 +30,7 @@ const validationSchema = toTypedSchema(formSchema)
 type FormData = z.infer<typeof formSchema>
 
 const onSubmit = async (values: Record<string, unknown>) => {
-  await $post('/auth/login', values as FormData, 'Login successful')
+  await AuthService.login(values as FormData)
 }
 </script>
 <template>

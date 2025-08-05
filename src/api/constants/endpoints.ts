@@ -1,0 +1,131 @@
+// API Endpoints Constants
+export const API_ENDPOINTS = {
+  // Authentication
+  AUTH: {
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    LOGOUT: '/auth/logout',
+    PROFILE: '/auth/profile',
+    UPDATE_PROFILE: '/auth/profile',
+    CHANGE_PASSWORD: '/auth/change-password',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: '/auth/reset-password',
+  },
+
+  // User Management
+  USERS: {
+    LIST: '/users',
+    DETAIL: (id: string) => `/users/${id}`,
+    CREATE: '/users',
+    UPDATE: (id: string) => `/users/${id}`,
+    DELETE: (id: string) => `/users/${id}`,
+    SEARCH: '/users/search',
+  },
+
+  // Board Management
+  BOARDS: {
+    LIST: '/boards',
+    DETAIL: (id: string) => `/boards/${id}`,
+    CREATE: '/boards',
+    UPDATE: (id: string) => `/boards/${id}`,
+    DELETE: (id: string) => `/boards/${id}`,
+    MEMBERS: (id: string) => `/boards/${id}/members`,
+    ADD_MEMBER: (id: string) => `/boards/${id}/members`,
+    REMOVE_MEMBER: (boardId: string, userId: string) => `/boards/${boardId}/members/${userId}`,
+  },
+
+  // List Management
+  LISTS: {
+    LIST: '/lists',
+    DETAIL: (id: string) => `/lists/${id}`,
+    CREATE: '/lists',
+    UPDATE: (id: string) => `/lists/${id}`,
+    DELETE: (id: string) => `/lists/${id}`,
+    BY_BOARD: (boardId: string) => `/boards/${boardId}/lists`,
+    REORDER: (id: string) => `/lists/${id}/reorder`,
+  },
+
+  // Card Management
+  CARDS: {
+    LIST: '/cards',
+    DETAIL: (id: string) => `/cards/${id}`,
+    CREATE: '/cards',
+    UPDATE: (id: string) => `/cards/${id}`,
+    DELETE: (id: string) => `/cards/${id}`,
+    BY_LIST: (listId: string) => `/lists/${listId}/cards`,
+    MOVE: (id: string) => `/cards/${id}/move`,
+    ASSIGN_MEMBER: (id: string) => `/cards/${id}/members`,
+    REMOVE_MEMBER: (cardId: string, userId: string) => `/cards/${cardId}/members/${userId}`,
+    COMMENTS: (id: string) => `/cards/${id}/comments`,
+    ATTACHMENTS: (id: string) => `/cards/${id}/attachments`,
+  },
+
+  // Comment Management
+  COMMENTS: {
+    LIST: '/comments',
+    DETAIL: (id: string) => `/comments/${id}`,
+    CREATE: '/comments',
+    UPDATE: (id: string) => `/comments/${id}`,
+    DELETE: (id: string) => `/comments/${id}`,
+  },
+
+  // File/Attachment Management
+  FILES: {
+    UPLOAD: '/files/upload',
+    DOWNLOAD: (id: string) => `/files/${id}/download`,
+    DELETE: (id: string) => `/files/${id}`,
+  },
+
+  // Activity/History
+  ACTIVITIES: {
+    LIST: '/activities',
+    BY_BOARD: (boardId: string) => `/boards/${boardId}/activities`,
+    BY_CARD: (cardId: string) => `/cards/${cardId}/activities`,
+  },
+
+  // Notifications
+  NOTIFICATIONS: {
+    LIST: '/notifications',
+    MARK_READ: (id: string) => `/notifications/${id}/read`,
+    MARK_ALL_READ: '/notifications/read-all',
+    DELETE: (id: string) => `/notifications/${id}`,
+  },
+
+  // Teams/Organizations
+  TEAMS: {
+    LIST: '/teams',
+    DETAIL: (id: string) => `/teams/${id}`,
+    CREATE: '/teams',
+    UPDATE: (id: string) => `/teams/${id}`,
+    DELETE: (id: string) => `/teams/${id}`,
+    MEMBERS: (id: string) => `/teams/${id}/members`,
+    ADD_MEMBER: (id: string) => `/teams/${id}/members`,
+    REMOVE_MEMBER: (teamId: string, userId: string) => `/teams/${teamId}/members/${userId}`,
+    BOARDS: (id: string) => `/teams/${id}/boards`,
+  },
+} as const;
+
+// API Response Status Codes
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  UNPROCESSABLE_ENTITY: 422,
+  INTERNAL_SERVER_ERROR: 500,
+} as const;
+
+// API Error Messages
+export const API_ERROR_MESSAGES = {
+  NETWORK_ERROR: 'Lỗi kết nối mạng',
+  UNAUTHORIZED: 'Phiên đăng nhập đã hết hạn',
+  FORBIDDEN: 'Bạn không có quyền truy cập',
+  NOT_FOUND: 'Không tìm thấy dữ liệu',
+  VALIDATION_ERROR: 'Dữ liệu không hợp lệ',
+  SERVER_ERROR: 'Lỗi máy chủ, vui lòng thử lại sau',
+  UNKNOWN_ERROR: 'Đã xảy ra lỗi không xác định',
+} as const;
