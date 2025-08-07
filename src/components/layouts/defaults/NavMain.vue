@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import {
   type LucideIcon,
 } from 'lucide-vue-next'
@@ -11,6 +12,8 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 
+import WorkspaceDialog from '@/components/dialogs/WorkspaceDialog.vue'
+
 defineProps<{
   projects: {
     name: string
@@ -19,6 +22,25 @@ defineProps<{
   }[]
 }>()
 
+const emit = defineEmits<{
+  workspaceCreated: []
+}>()
+
+const isDialogOpen = ref(false)
+
+const handleItemClick = (item: { name: string; url: string; icon: LucideIcon }) => {
+  if (item.name === 'New workspace') {
+    isDialogOpen.value = true
+  } else {
+    // Navigate to other items
+    window.location.href = item.url
+  }
+}
+
+const handleWorkspaceCreated = () => {
+  emit('workspaceCreated')
+}
+
 </script>
 
 <template>
@@ -26,13 +48,17 @@ defineProps<{
     <SidebarGroupLabel>Main</SidebarGroupLabel>
     <SidebarMenu>
       <SidebarMenuItem v-for="item in projects" :key="item.name">
-        <SidebarMenuButton as-child>
-          <a :href="item.url">
-            <component :is="item.icon" />
-            <span>{{ item.name }}</span>
-          </a>
+        <SidebarMenuButton @click="handleItemClick(item)">
+          <component :is="item.icon" />
+          <span>{{ item.name }}</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
   </SidebarGroup>
+
+  <!-- Workspace Dialog -->
+  <WorkspaceDialog
+    v-model:open="isDialogOpen"
+    @workspace-created="handleWorkspaceCreated"
+  />
 </template>

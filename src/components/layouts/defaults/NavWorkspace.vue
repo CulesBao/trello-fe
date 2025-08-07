@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronRight, type LucideIcon } from 'lucide-vue-next'
+import { ChevronRight } from 'lucide-vue-next'
 import {
   Collapsible,
   CollapsibleContent,
@@ -20,7 +20,7 @@ defineProps<{
   items: {
     title: string
     url: string
-    icon?: LucideIcon
+    shortName: string
     isActive?: boolean
     items?: {
       title: string
@@ -44,7 +44,7 @@ defineProps<{
         <SidebarMenuItem>
           <CollapsibleTrigger as-child>
             <SidebarMenuButton :tooltip="item.title">
-              <component :is="item.icon" v-if="item.icon" />
+              <AvatarFallback>{{ item.shortName }}</AvatarFallback>
               <span>{{ item.title }}</span>
               <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
             </SidebarMenuButton>
