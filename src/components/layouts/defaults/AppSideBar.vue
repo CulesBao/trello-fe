@@ -3,21 +3,17 @@ import type { SidebarProps } from '@/components/ui/sidebar'
 
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
+  LayoutTemplate,
   SquareTerminal,
+  Table2,
+  BadgePlus
 } from 'lucide-vue-next'
+import NavWorkspace from '@/components/layouts/defaults/NavWorkspace.vue'
 import NavMain from '@/components/layouts/defaults/NavMain.vue'
-import NavProjects from '@/components/layouts/defaults/NavProjects.vue'
 import NavUser from '@/components/layouts/defaults/NavUser.vue'
 import TeamSwitcher from '@/components/layouts/defaults/TeamSwitcher.vue'
-import { UserService } from '@/api';
+import { UserService, type Workspace } from '@/api';
 import { useUserStore } from '@/stores/user';
 
 import {
@@ -28,17 +24,43 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 
-const props = withDefaults(defineProps<SidebarProps>(), {
+interface AppSidebarProps extends SidebarProps {
+  workspaces: Workspace[]
+}
+
+const props = withDefaults(defineProps<AppSidebarProps>(), {
   collapsible: 'icon',
+  workspaces: () => []
 })
+
+const projects = ref()
+
+// const workspaceProps = defineProps<Workspace[]>()
 const userStore = useUserStore()
 onMounted(async() => {
   await UserService.getMyProfile()
+  projects.value = props.workspaces.map((workspace: Workspace) => {
+  return {
+    id: workspace.id,
+    title: workspace.name,
+    url: `workspace/${workspace.id}`,
+    icon: SquareTerminal,
+    isActive: false,
+    items: [{
+      title: 'Boards',
+      url: '#'
+    },
+    {
+      title: 'Members',
+      url: '#'
+    },
+    {
+      title: 'Settings',
+      url: '#'
+    }]
+  }
 })
-onUnmounted(() => {
-
 })
-
 // This is sample data.
 const data = {
   teams: [
@@ -52,115 +74,23 @@ const data = {
       logo: AudioWaveform,
       plan: 'Startup',
     },
-    {
-      name: 'Evil Corp.',
-      logo: Command,
-      plan: 'Free',
-    },
   ],
   navMain: [
     {
-      title: 'Playground',
+      name: 'Table',
       url: '#',
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: 'History',
-          url: '#',
-        },
-        {
-          title: 'Starred',
-          url: '#',
-        },
-        {
-          title: 'Settings',
-          url: '#',
-        },
-      ],
+      icon: Table2,
     },
     {
-      title: 'Models',
+      name: 'Template',
       url: '#',
-      icon: Bot,
-      items: [
-        {
-          title: 'Genesis',
-          url: '#',
-        },
-        {
-          title: 'Explorer',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
+      icon: LayoutTemplate,
     },
     {
-      title: 'Documentation',
+      name: 'New workspace',
       url: '#',
-      icon: BookOpen,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
+      icon: BadgePlus,
+    }
   ],
 }
 </script>
@@ -171,8 +101,8 @@ const data = {
       <TeamSwitcher :teams="data.teams" />
     </SidebarHeader>
     <SidebarContent>
-      <NavMain :items="data.navMain" />
-      <NavProjects :projects="data.projects" />
+      <NavMain :projects="data.navMain" />
+      <NavWorkspace :items="projects" />
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="{ name: userStore.user?.name || 'Anonymous', email: userStore.user?.email || 'No Email', avatar: userStore.getShortName() }" />

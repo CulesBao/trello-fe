@@ -17,26 +17,31 @@ A modern Trello-like project management application built with Vue 3, TypeScript
 ## ✨ Features
 
 - 🔐 **Authentication & Authorization**
+
   - JWT-based authentication
   - Protected routes with middleware
   - User profile management
 
 - 📋 **Board Management**
+
   - Create, update, and delete boards
   - Board member management
   - Activity tracking
 
 - 📝 **List & Card Management**
+
   - Create and organize lists within boards
   - Drag-and-drop card management
   - Card details with comments and attachments
 
 - 👥 **Team Collaboration**
+
   - Team creation and management
   - Member invitation and role management
   - Real-time collaboration
 
 - 🔔 **Notifications**
+
   - In-app notification system
   - Activity-based notifications
 
@@ -47,6 +52,7 @@ A modern Trello-like project management application built with Vue 3, TypeScript
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Vue 3** - Progressive JavaScript framework
 - **TypeScript** - Type-safe JavaScript
 - **Vite** - Fast build tool and dev server
@@ -54,16 +60,20 @@ A modern Trello-like project management application built with Vue 3, TypeScript
 - **Shadcn/ui** - Beautiful and accessible UI components
 
 ### State Management
+
 - **Pinia** - Intuitive state management for Vue
 
 ### HTTP Client
+
 - **Axios** - Promise-based HTTP client with interceptors
 
 ### Authentication
+
 - **JWT** - JSON Web Tokens for secure authentication
 - **jwt-decode** - JWT token parsing
 
 ### UI/UX
+
 - **Lucide Vue** - Beautiful icons
 - **Vue3 Toastify** - Toast notifications
 - **Radix Vue** - Unstyled, accessible UI primitives
@@ -101,12 +111,14 @@ src/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/CulesBao/trello-fe.git
    cd trello-fe
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -114,15 +126,19 @@ src/
    ```
 
 3. **Environment setup**
+
    ```bash
    cp .env.example .env
    ```
+
    Update the `.env` file with your API configuration:
+
    ```env
    VITE_API_URL=http://localhost:3000/api
    ```
 
 4. **Start development server**
+
    ```bash
    npm run dev
    # or
@@ -150,16 +166,16 @@ The application uses a service-oriented architecture for API calls:
 ### Usage Example
 
 ```typescript
-import { AuthService, BoardService } from '@/api'
+import { AuthService, BoardService } from "@/api";
 
 // Login
 const user = await AuthService.login({
-  email: 'user@example.com',
-  password: 'password'
-})
+  email: "user@example.com",
+  password: "password",
+});
 
 // Get user's boards
-const boards = await BoardService.getBoards()
+const boards = await BoardService.getBoards();
 ```
 
 ## 🔐 Authentication
@@ -168,9 +184,9 @@ const boards = await BoardService.getBoards()
 
 ```typescript
 // Auth store usage
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from "@/stores/auth";
 
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 
 // Check if user is logged in
 if (authStore.isLoggedIn) {
@@ -178,7 +194,7 @@ if (authStore.isLoggedIn) {
 }
 
 // Logout
-authStore.logout()
+authStore.logout();
 ```
 
 ### Protected Routes
@@ -261,8 +277,8 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
+| Variable       | Description     | Default                     |
+| -------------- | --------------- | --------------------------- |
 | `VITE_API_URL` | Backend API URL | `http://localhost:3000/api` |
 
 ## 🤝 Contributing
@@ -287,6 +303,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **CulesBao**
+
 - GitHub: [@CulesBao](https://github.com/CulesBao)
 
 ## 🙏 Acknowledgments

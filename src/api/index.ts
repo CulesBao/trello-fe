@@ -13,7 +13,6 @@ export {
   CardService,
   CommentService,
   NotificationService,
-  TeamService,
   FileService,
 } from './services';
 

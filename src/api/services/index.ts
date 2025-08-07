@@ -5,7 +5,7 @@ export { BoardService, ListService } from './board.service';
 export { CardService } from './card.service';
 export { CommentService } from './comment.service';
 export { NotificationService } from './notification.service';
-export { TeamService } from './team.service';
+export { WorkspaceService } from './workspaces.service';
 export { FileService } from './file.service';
 
 // Export default services for convenience
@@ -15,5 +15,5 @@ export { default as Board } from './board.service';
 export { default as Card } from './card.service';
 export { default as Comment } from './comment.service';
 export { default as Notification } from './notification.service';
-export { default as Team } from './team.service';
+export { default as Workspace } from './workspaces.service';
 export { default as File } from './file.service';

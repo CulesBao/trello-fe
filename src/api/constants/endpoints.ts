@@ -90,17 +90,16 @@ export const API_ENDPOINTS = {
     DELETE: (id: string) => `/notifications/${id}`,
   },
 
-  // Teams/Organizations
-  TEAMS: {
-    LIST: '/teams',
-    DETAIL: (id: string) => `/teams/${id}`,
-    CREATE: '/teams',
-    UPDATE: (id: string) => `/teams/${id}`,
-    DELETE: (id: string) => `/teams/${id}`,
-    MEMBERS: (id: string) => `/teams/${id}/members`,
-    ADD_MEMBER: (id: string) => `/teams/${id}/members`,
-    REMOVE_MEMBER: (teamId: string, userId: string) => `/teams/${teamId}/members/${userId}`,
-    BOARDS: (id: string) => `/teams/${id}/boards`,
+  WORKSPACES: {
+    LIST: '/workspaces',
+    DETAIL: (id: string) => `/workspaces/${id}`,
+    CREATE: '/workspaces',
+    UPDATE: (id: string) => `/workspaces/${id}`,
+    DELETE: (id: string) => `/workspaces/${id}`,
+    MEMBERS: (id: string) => `/workspaces/${id}/members`,
+    ADD_MEMBER: (id: string) => `/workspaces/${id}/members`,
+    REMOVE_MEMBER: (workspaceId: string, userId: string) => `/workspaces/${workspaceId}/members/${userId}`,
+    BOARDS: (id: string) => `/workspaces/${id}/boards`,
   },
 } as const;
 
