@@ -17,31 +17,26 @@ A modern Trello-like project management application built with Vue 3, TypeScript
 ## ✨ Features
 
 - 🔐 **Authentication & Authorization**
-
   - JWT-based authentication
   - Protected routes with middleware
   - User profile management
 
 - 📋 **Board Management**
-
   - Create, update, and delete boards
   - Board member management
   - Activity tracking
 
 - 📝 **List & Card Management**
-
   - Create and organize lists within boards
   - Drag-and-drop card management
   - Card details with comments and attachments
 
 - 👥 **Team Collaboration**
-
   - Team creation and management
   - Member invitation and role management
   - Real-time collaboration
 
 - 🔔 **Notifications**
-
   - In-app notification system
   - Activity-based notifications
 
@@ -166,16 +161,16 @@ The application uses a service-oriented architecture for API calls:
 ### Usage Example
 
 ```typescript
-import { AuthService, BoardService } from "@/api";
+import { AuthService, BoardService } from '@/api'
 
 // Login
 const user = await AuthService.login({
-  email: "user@example.com",
-  password: "password",
-});
+  email: 'user@example.com',
+  password: 'password',
+})
 
 // Get user's boards
-const boards = await BoardService.getBoards();
+const boards = await BoardService.getBoards()
 ```
 
 ## 🔐 Authentication
@@ -184,9 +179,9 @@ const boards = await BoardService.getBoards();
 
 ```typescript
 // Auth store usage
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 // Check if user is logged in
 if (authStore.isLoggedIn) {
@@ -194,7 +189,7 @@ if (authStore.isLoggedIn) {
 }
 
 // Logout
-authStore.logout();
+authStore.logout()
 ```
 
 ### Protected Routes

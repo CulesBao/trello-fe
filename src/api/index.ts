@@ -1,8 +1,8 @@
 // Export axios client
-export * from './axios.client';
+export * from './axios.client'
 
 // Export all types
-export * from './types';
+export * from './types'
 
 // Export all services with explicit naming
 export {
@@ -13,7 +13,7 @@ export {
   CommentService,
   NotificationService,
   FileService,
-} from './services';
+} from './services'
 
 // Export all constants
-export * from './constants';
+export * from './constants'

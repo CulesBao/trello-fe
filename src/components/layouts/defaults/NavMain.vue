@@ -1,43 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import {
-  type LucideIcon,
-} from 'lucide-vue-next'
+  import { ref } from 'vue'
+  import { type LucideIcon } from 'lucide-vue-next'
 
-import {
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/ui/sidebar'
+  import {
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+  } from '@/components/ui/sidebar'
 
-import WorkspaceDialog from '@/components/dialogs/WorkspaceDialog.vue'
-import BoardDialog from '@/components/dialogs/BoardDialog.vue'
+  import WorkspaceDialog from '@/components/dialogs/WorkspaceDialog.vue'
+  import BoardDialog from '@/components/dialogs/BoardDialog.vue'
 
-defineProps<{
-  projects: {
+  defineProps<{
+    projects: {
+      name: string
+      url: string
+      icon: LucideIcon
+      isDialog?: boolean
+    }[]
+  }>()
+
+  const isDialogOpen = ref(false)
+  const activeDialog = ref<'workspace' | 'board' | null>(null)
+
+  const handleItemClick = (item: {
     name: string
     url: string
     icon: LucideIcon
     isDialog?: boolean
-  }[]
-}>()
-
-
-const isDialogOpen = ref(false)
-const activeDialog = ref<'workspace' | 'board' | null>(null)
-
-const handleItemClick = (item: { name: string; url: string; icon: LucideIcon; isDialog?: boolean; form?: 'workspace' | 'board' }) => {
-  if (item.isDialog) {
-  isDialogOpen.value = true
-  activeDialog.value = item.form ?? (item.name.toLowerCase().includes('board') ? 'board' : 'workspace')
-  } else {
-    // Navigate to other items
-    window.location.href = item.url
+    form?: 'workspace' | 'board'
+  }) => {
+    if (item.isDialog) {
+      isDialogOpen.value = true
+      activeDialog.value =
+        item.form ?? (item.name.toLowerCase().includes('board') ? 'board' : 'workspace')
+    } else {
+      // Navigate to other items
+      window.location.href = item.url
+    }
   }
-}
-
 </script>
 
 <template>
@@ -54,12 +57,6 @@ const handleItemClick = (item: { name: string; url: string; icon: LucideIcon; is
   </SidebarGroup>
 
   <!-- Workspace Dialog -->
-  <WorkspaceDialog
-    v-if="activeDialog === 'workspace'"
-    v-model:open="isDialogOpen"
-  />
-  <BoardDialog
-    v-if="activeDialog === 'board'"
-    v-model:open="isDialogOpen"
-  />
+  <WorkspaceDialog v-if="activeDialog === 'workspace'" v-model:open="isDialogOpen" />
+  <BoardDialog v-if="activeDialog === 'board'" v-model:open="isDialogOpen" />
 </template>

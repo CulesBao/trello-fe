@@ -17,4 +17,11 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+  {
+    name: 'prettier/integration',
+    rules: {
+      // Disable ESLint rules that might conflict with Prettier
+      'prettier/prettier': 'off',
+    },
+  }
 )

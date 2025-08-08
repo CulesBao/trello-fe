@@ -10,8 +10,8 @@
 </template>
 
 <style>
-.error-page {
-  text-align: center;
-  margin-top: 100px;
-}
+  .error-page {
+    text-align: center;
+    margin-top: 100px;
+  }
 </style>

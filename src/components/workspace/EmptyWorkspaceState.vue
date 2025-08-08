@@ -1,17 +1,6 @@
 <script setup lang="ts">
-import { Grid3x3 } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
-defineOptions({ name: 'EmptyWorkspaceState' })
-
-interface Emits {
-  (e: 'create-workspace'): void
-}
-
-const emit = defineEmits<Emits>()
-
-const handleCreateWorkspace = () => {
-  emit('create-workspace')
-}
+  import { Grid3x3 } from 'lucide-vue-next'
+  defineOptions({ name: 'EmptyWorkspaceState' })
 </script>
 
 <template>
@@ -20,11 +9,9 @@ const handleCreateWorkspace = () => {
       <Grid3x3 class="h-16 w-16 mx-auto text-muted-foreground mb-6" />
       <h3 class="text-xl font-semibold mb-3">No workspaces found</h3>
       <p class="text-muted-foreground mb-6 max-w-md">
-        Create your first workspace to get started with organizing your boards and collaborating with your team.
+        Create your first workspace to get started with organizing your boards and collaborating
+        with your team.
       </p>
-      <Button size="lg" class="px-6 py-3" @click="handleCreateWorkspace">
-        Create Workspace
-      </Button>
     </div>
   </div>
 </template>

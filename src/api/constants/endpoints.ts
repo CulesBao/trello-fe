@@ -98,10 +98,11 @@ export const API_ENDPOINTS = {
     DELETE: (id: string) => `/workspaces/${id}`,
     MEMBERS: (id: string) => `/workspaces/${id}/members`,
     ADD_MEMBER: (id: string) => `/workspaces/${id}/members`,
-    REMOVE_MEMBER: (workspaceId: string, userId: string) => `/workspaces/${workspaceId}/members/${userId}`,
+    REMOVE_MEMBER: (workspaceId: string, userId: string) =>
+      `/workspaces/${workspaceId}/members/${userId}`,
     BOARDS: (id: string) => `/workspaces/${id}/boards`,
   },
-} as const;
+} as const
 
 // API Response Status Codes
 export const HTTP_STATUS = {
@@ -115,7 +116,7 @@ export const HTTP_STATUS = {
   CONFLICT: 409,
   UNPROCESSABLE_ENTITY: 422,
   INTERNAL_SERVER_ERROR: 500,
-} as const;
+} as const
 
 // API Error Messages
 export const API_ERROR_MESSAGES = {
@@ -126,4 +127,4 @@ export const API_ERROR_MESSAGES = {
   VALIDATION_ERROR: 'Dữ liệu không hợp lệ',
   SERVER_ERROR: 'Lỗi máy chủ, vui lòng thử lại sau',
   UNKNOWN_ERROR: 'Đã xảy ra lỗi không xác định',
-} as const;
+} as const

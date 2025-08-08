@@ -13,18 +13,14 @@ export default defineConfig({
     vueDevTools(),
     tailwindcss(),
     AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-        'pinia'
-      ],
+      imports: ['vue', 'vue-router', 'pinia'],
       dts: true,
       dirs: ['src/composables', 'src/store'],
-    })
+    }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 })

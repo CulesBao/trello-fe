@@ -1,71 +1,74 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
-import { useWorkspaceStore } from '@/stores/workspace'
-import { BoardService } from '@/api/services'
+  import { ref } from 'vue'
+  import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+  } from '@/components/ui/dialog'
+  import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+  } from '@/components/ui/form'
+  import { Input } from '@/components/ui/input'
+  import { Button } from '@/components/ui/button'
+  import { toTypedSchema } from '@vee-validate/zod'
+  import * as z from 'zod'
+  import { useWorkspaceStore } from '@/stores/workspace'
+  import { BoardService } from '@/api/services'
 
-interface Props {
-  open: boolean
-}
-
-const props = defineProps<Props>()
-
-const emit = defineEmits<{
-  'update:open': [value: boolean]
-  'board-created': []
-}>()
-
-const formSchema = z.object({
-  title: z.string().min(1, 'Board title is required').max(80, 'Board title must be less than 80 characters'),
-  description: z.string().max(200, 'Description must be less than 200 characters').optional(),
-  workspaceId: z.number({ required_error: 'Please select a workspace' })
-})
-const workspaceStore = useWorkspaceStore()
-
-const validationSchema = toTypedSchema(formSchema)
-
-type FormData = z.infer<typeof formSchema>
-
-const isCreating = ref(false)
-const onSubmit = async (values: Record<string, unknown>) => {
-  const formData = values as FormData
-  isCreating.value = true
-
-  try {
-    await BoardService.createBoard({
-      name: formData.title,
-      description: formData.description || '',
-      workspaceId: formData.workspaceId
-    })
-    await workspaceStore.reload()
-    emit('update:open', false)
-    emit('board-created')
-  }finally {
-    isCreating.value = false
+  interface Props {
+    open: boolean
   }
-}
 
-const closeDialog = () => {
-  emit('update:open', false)
-}
+  const props = defineProps<Props>()
+
+  const emit = defineEmits<{
+    'update:open': [value: boolean]
+    'board-created': []
+  }>()
+
+  const formSchema = z.object({
+    title: z
+      .string()
+      .min(1, 'Board title is required')
+      .max(80, 'Board title must be less than 80 characters'),
+    description: z.string().max(200, 'Description must be less than 200 characters').optional(),
+    workspaceId: z.number({ required_error: 'Please select a workspace' }),
+  })
+  const workspaceStore = useWorkspaceStore()
+
+  const validationSchema = toTypedSchema(formSchema)
+
+  type FormData = z.infer<typeof formSchema>
+
+  const isCreating = ref(false)
+  const onSubmit = async (values: Record<string, unknown>) => {
+    const formData = values as FormData
+    isCreating.value = true
+
+    try {
+      await BoardService.createBoard({
+        name: formData.title,
+        description: formData.description || '',
+        workspaceId: formData.workspaceId,
+      })
+      await workspaceStore.reload()
+      emit('update:open', false)
+      emit('board-created')
+    } finally {
+      isCreating.value = false
+    }
+  }
+
+  const closeDialog = () => {
+    emit('update:open', false)
+  }
 </script>
 
 <template>
@@ -131,18 +134,10 @@ const closeDialog = () => {
         </FormField>
 
         <div class="flex justify-end gap-2 pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            @click="closeDialog"
-            :disabled="isCreating"
-          >
+          <Button type="button" variant="outline" @click="closeDialog" :disabled="isCreating">
             Cancel
           </Button>
-          <Button
-            type="submit"
-            :disabled="isCreating"
-          >
+          <Button type="submit" :disabled="isCreating">
             {{ isCreating ? 'Creating...' : 'Create Board' }}
           </Button>
         </div>

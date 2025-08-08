@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios'
-import 'vue3-toastify/dist/index.css';
+import 'vue3-toastify/dist/index.css'
 
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
+  baseURL: import.meta.env.VITE_API_URL,
 })
 
 axiosClient.interceptors.request.use((config) => {

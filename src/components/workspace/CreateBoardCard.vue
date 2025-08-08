@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { Plus } from 'lucide-vue-next'
-import { Card, CardContent } from '@/components/ui/card'
-defineOptions({ name: 'CreateBoardCard' })
+  import { Plus } from 'lucide-vue-next'
+  import { Card, CardContent } from '@/components/ui/card'
+  import BoardDialog from '../dialogs/BoardDialog.vue'
+  defineOptions({ name: 'CreateBoardCard' })
 
-interface Emits {
-  (e: 'create-board'): void
-}
+  const isDialogOpen = ref(false)
 
-const emit = defineEmits<Emits>()
-
-const handleCreateBoard = () => {
-  emit('create-board')
-}
+  const handleCreateBoard = () => {
+    console.log('Creating board...')
+    isDialogOpen.value = true
+  }
 </script>
 
 <template>
@@ -24,4 +22,5 @@ const handleCreateBoard = () => {
       <p class="text-sm font-medium text-muted-foreground">Create new board</p>
     </CardContent>
   </Card>
+  <BoardDialog v-model:open="isDialogOpen" />
 </template>

@@ -1,9 +1,9 @@
-import type { BaseEntity } from './common';
+import type { BaseEntity } from './common'
 
 // Board Types
 export interface Board extends BaseEntity {
-  name: string;
-  description: string;
+  name: string
+  description: string
   workspaceId: number
   admin: User
   users: User[]
@@ -19,20 +19,20 @@ interface List {
   name: string
 }
 export interface CreateBoardRequest {
-  name: string;
-  description?: string;
+  name: string
+  description?: string
   workspaceId: number
 }
 
 export interface UpdateBoardRequest {
-  title?: string;
-  description?: string;
-  background?: string;
-  isPublic?: boolean;
-  visibility?: 'private' | 'team' | 'public';
+  title?: string
+  description?: string
+  background?: string
+  isPublic?: boolean
+  visibility?: 'private' | 'team' | 'public'
 }
 
 export interface AddBoardMemberRequest {
-  userId: string;
-  role: 'admin' | 'member' | 'observer';
+  userId: string
+  role: 'admin' | 'member' | 'observer'
 }

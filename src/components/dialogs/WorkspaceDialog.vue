@@ -1,73 +1,76 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
-import { WorkspaceService } from '@/api/services'
-import { useWorkspaceStore } from '@/stores/workspace'
+  import { ref } from 'vue'
+  import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+  } from '@/components/ui/dialog'
+  import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+  } from '@/components/ui/form'
+  import { Input } from '@/components/ui/input'
+  import { Button } from '@/components/ui/button'
+  import { toTypedSchema } from '@vee-validate/zod'
+  import * as z from 'zod'
+  import { WorkspaceService } from '@/api/services'
+  import { useWorkspaceStore } from '@/stores/workspace'
 
-interface Props {
-  open: boolean
-}
-
-const props = defineProps<Props>()
-
-const emit = defineEmits<{
-  'update:open': [value: boolean]
-  'workspace-created': []
-}>()
-
-const formSchema = z.object({
-  name: z.string().min(1, 'Workspace name is required').max(50, 'Workspace name must be less than 50 characters'),
-  description: z.string().max(200, 'Description must be less than 200 characters').optional(),
-})
-
-const validationSchema = toTypedSchema(formSchema)
-
-type FormData = z.infer<typeof formSchema>
-
-const isCreating = ref(false)
-const workspaceStore = useWorkspaceStore()
-
-const onSubmit = async (values: Record<string, unknown>) => {
-  const formData = values as FormData
-  isCreating.value = true
-
-  try {
-    await WorkspaceService.createWorkspace({
-      name: formData.name,
-      description: formData.description || ''
-    })
-    await workspaceStore.reload()
-    // Close dialog and emit success event
-    emit('update:open', false)
-    emit('workspace-created')
-  } catch (error) {
-    console.error('Error creating workspace:', error)
-  } finally {
-    isCreating.value = false
+  interface Props {
+    open: boolean
   }
-}
 
-const closeDialog = () => {
-  emit('update:open', false)
-}
+  const props = defineProps<Props>()
+
+  const emit = defineEmits<{
+    'update:open': [value: boolean]
+    'workspace-created': []
+  }>()
+
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(1, 'Workspace name is required')
+      .max(50, 'Workspace name must be less than 50 characters'),
+    description: z.string().max(200, 'Description must be less than 200 characters').optional(),
+  })
+
+  const validationSchema = toTypedSchema(formSchema)
+
+  type FormData = z.infer<typeof formSchema>
+
+  const isCreating = ref(false)
+  const workspaceStore = useWorkspaceStore()
+
+  const onSubmit = async (values: Record<string, unknown>) => {
+    const formData = values as FormData
+    isCreating.value = true
+
+    try {
+      await WorkspaceService.createWorkspace({
+        name: formData.name,
+        description: formData.description || '',
+      })
+      await workspaceStore.reload()
+      // Close dialog and emit success event
+      emit('update:open', false)
+      emit('workspace-created')
+    } catch (error) {
+      console.error('Error creating workspace:', error)
+    } finally {
+      isCreating.value = false
+    }
+  }
+
+  const closeDialog = () => {
+    emit('update:open', false)
+  }
 </script>
 
 <template>
@@ -110,18 +113,10 @@ const closeDialog = () => {
         </FormField>
 
         <div class="flex justify-end gap-2 pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            @click="closeDialog"
-            :disabled="isCreating"
-          >
+          <Button type="button" variant="outline" @click="closeDialog" :disabled="isCreating">
             Cancel
           </Button>
-          <Button
-            type="submit"
-            :disabled="isCreating"
-          >
+          <Button type="submit" :disabled="isCreating">
             {{ isCreating ? 'Creating...' : 'Create Workspace' }}
           </Button>
         </div>

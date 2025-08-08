@@ -7,7 +7,6 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref(JSONToken || '')
   const userId = ref(typeof JSONToken === 'string' ? jwtDecode(JSONToken).id : '')
 
-
   const isLoggedIn = computed(() => Boolean(token.value))
 
   function logout() {
