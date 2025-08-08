@@ -1,23 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import WorkspaceSection from './WorkspaceSection.vue'
 import EmptyWorkspaceState from './EmptyWorkspaceState.vue'
-import type { Workspace } from '@/api/types/workspace'
-import type { Board } from '@/api/types/board'
+// Board click in this layout only needs id/name/description
+import { useWorkspaceStore } from '@/stores/workspace'
+import BoardDialog from '@/components/dialogs/BoardDialog.vue'
+import { ref } from 'vue'
+defineOptions({ name: 'WorkspaceLayout' })
 
-interface Props {
-  workspaces: Workspace[]
-}
-
-const props = defineProps<Props>()
-
-// Mock boards data - replace with real API call
-const mockBoards = ref<Board[]>([])
-
-const getBoardsForWorkspace = (workspaceId: string) => {
-  return mockBoards.value.filter(board => board.teamId === workspaceId)
-}
-
+const workspaceStore = useWorkspaceStore()
 // Event handlers
 const handleNavigateToBoards = (workspaceId: string) => {
   console.log('Navigate to boards for workspace:', workspaceId)
@@ -34,12 +24,15 @@ const handleNavigateToSettings = (workspaceId: string) => {
   // TODO: Navigate to settings page
 }
 
+const createBoardOpen = ref(false)
+const createBoardWorkspaceId = ref<string | number | undefined>(undefined)
+
 const handleCreateBoard = (workspaceId: string) => {
-  console.log('Create new board in workspace:', workspaceId)
-  // TODO: Implement create board logic
+  createBoardWorkspaceId.value = workspaceId
+  createBoardOpen.value = true
 }
 
-const handleBoardClick = (board: Board) => {
+const handleBoardClick = (board: { id: string | number; name: string; description?: string }) => {
   console.log('Navigate to board:', board.id)
   // TODO: Navigate to board detail page
 }
@@ -56,13 +49,12 @@ const handleCreateWorkspace = () => {
       <h1 class="text-3xl font-bold tracking-tight">My Workspaces</h1>
     </div>
 
-    <!-- All Workspaces -->
-    <div v-if="props.workspaces.length > 0" class="space-y-12">
+  <!-- All Workspaces -->
+  <div v-if="workspaceStore.workspaces.length > 0" class="space-y-12">
       <WorkspaceSection
-        v-for="workspace in props.workspaces"
+    v-for="workspace in workspaceStore.workspaces"
         :key="workspace.id"
         :workspace="workspace"
-        :boards="getBoardsForWorkspace(workspace.id)"
         @navigate-to-boards="handleNavigateToBoards"
         @navigate-to-members="handleNavigateToMembers"
         @navigate-to-settings="handleNavigateToSettings"
@@ -75,6 +67,13 @@ const handleCreateWorkspace = () => {
     <EmptyWorkspaceState
       v-else
       @create-workspace="handleCreateWorkspace"
+    />
+
+    <!-- Board Create Dialog -->
+    <BoardDialog
+      v-model:open="createBoardOpen"
+      :workspace-id="createBoardWorkspaceId as any"
+      @board-created="workspaceStore.reload()"
     />
   </div>
 </template>

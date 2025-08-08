@@ -15,19 +15,38 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
+import { useWorkspaceStore } from '@/stores/workspace';
+import type { Workspace } from '@/api';
+import { getShortName } from '@/utils/shortName';
 
-defineProps<{
+interface ProjectItem {
+  id: string
+  title: string
+  url: string
+  isActive: boolean
+  shortName: string
   items: {
     title: string
     url: string
-    shortName: string
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
   }[]
-}>()
+}
+const items: Ref<ProjectItem[]> = ref([])
+const workspaceStore = useWorkspaceStore()
+watchEffect(() => {
+  const list = workspaceStore.workspaces
+  items.value = (list ?? []).map((workspace: Workspace) => ({
+    id: workspace.id,
+    title: workspace.name,
+    url: `workspace/${workspace.id}`,
+    shortName: getShortName(workspace.name),
+    isActive: false,
+    items: [
+      { title: 'Boards', url: '#' },
+      { title: 'Members', url: '#' },
+      { title: 'Settings', url: '#' },
+    ],
+  }))
+})
 </script>
 
 <template>

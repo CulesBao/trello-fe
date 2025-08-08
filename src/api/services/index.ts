@@ -1,7 +1,7 @@
 // Export all API services
 export { AuthService } from './auth.service';
 export { UserService } from './user.service';
-export { BoardService, ListService } from './board.service';
+export { BoardService } from './board.service';
 export { CardService } from './card.service';
 export { CommentService } from './comment.service';
 export { NotificationService } from './notification.service';

@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import CreateBoardCard from './CreateBoardCard.vue'
 import BoardCard from './BoardCard.vue'
-import type { Board } from '@/api/types/board'
+
+type BoardItem = { id: number | string; name: string; description?: string }
 
 interface Props {
-  boards: Board[]
+  boards: BoardItem[]
 }
 
 interface Emits {
   (e: 'create-board'): void
-  (e: 'board-click', board: Board): void
+  (e: 'board-click', board: BoardItem): void
 }
+
+defineOptions({ name: 'BoardGrid' })
 
 defineProps<Props>()
 const emit = defineEmits<Emits>()
@@ -19,7 +22,7 @@ const handleCreateBoard = () => {
   emit('create-board')
 }
 
-const handleBoardClick = (board: Board) => {
+const handleBoardClick = (board: BoardItem) => {
   emit('board-click', board)
 }
 </script>

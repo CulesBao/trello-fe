@@ -1,11 +1,5 @@
-<script lang="ts">
-export const description = 'A sidebar that collapses to icons.'
-export const iframeHeight = '800px'
-export const containerClass = 'w-full h-full'
-</script>
-
 <script setup lang="ts">
-import { ref, onMounted, type Ref } from 'vue'
+import { onMounted } from 'vue'
 import AppSidebar from '@/components/layouts/defaults/AppSideBar.vue'
 import WorkspaceLayout from '@/components/workspace/WorkspaceLayout.vue'
 
@@ -15,27 +9,21 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar'
-import { WorkspaceService } from '@/api/services'
-import { type Workspace } from '@/api/types/workspace'
+import { useWorkspaceStore } from '@/stores/workspace'
 
-const myWorkspace : Ref<Workspace[]> = ref([])
+defineOptions({ name: 'HomeView' })
 
-const loadWorkspaces = async () => {
-  myWorkspace.value = await WorkspaceService.getWorkspaces()
-}
+const workspaceStore = useWorkspaceStore()
 
-const handleWorkspaceCreated = () => {
-  loadWorkspaces()
-}
 
 onMounted(async () => {
-  await loadWorkspaces()
+  await workspaceStore.loadWorkspaces()
 })
 </script>
 
 <template>
   <SidebarProvider>
-    <AppSidebar :workspaces="myWorkspace" @workspace-created="handleWorkspaceCreated" />
+  <AppSidebar/>
     <SidebarInset>
       <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
         <div class="flex items-center gap-2 px-4">
@@ -44,7 +32,7 @@ onMounted(async () => {
         </div>
       </header>
       <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <WorkspaceLayout :workspaces="myWorkspace" />
+        <WorkspaceLayout />
       </div>
     </SidebarInset>
   </SidebarProvider>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Plus } from 'lucide-vue-next'
 import { Card, CardContent } from '@/components/ui/card'
+defineOptions({ name: 'CreateBoardCard' })
 
 interface Emits {
   (e: 'create-board'): void

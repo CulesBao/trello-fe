@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Badge from '@/components/ui/badge/Badge.vue'
-import type { Board } from '@/api/types/board'
+
+type BoardItem = { id: number | string; name: string; description?: string }
 
 interface Props {
-  board: Board
+  board: BoardItem
 }
 
 interface Emits {
-  (e: 'board-click', board: Board): void
+  (e: 'board-click', board: BoardItem): void
 }
+
+defineOptions({ name: 'BoardCard' })
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
@@ -25,17 +27,13 @@ const handleBoardClick = () => {
     @click="handleBoardClick"
   >
     <CardHeader class="pb-3">
-      <CardTitle class="text-lg font-semibold">{{ board.title }}</CardTitle>
+  <CardTitle class="text-lg font-semibold">{{ board.name }}</CardTitle>
       <CardDescription class="text-sm line-clamp-2 text-muted-foreground">
         {{ board.description }}
       </CardDescription>
     </CardHeader>
     <CardContent class="pt-0 pb-4">
-      <div class="flex items-center justify-between">
-        <Badge :variant="board.isPublic ? 'default' : 'secondary'" class="text-xs px-2 py-1">
-          {{ board.isPublic ? 'Public' : 'Private' }}
-        </Badge>
-      </div>
+      <!-- extra board meta could go here -->
     </CardContent>
   </Card>
 </template>

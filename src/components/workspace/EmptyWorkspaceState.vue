@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Grid3x3 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
+defineOptions({ name: 'EmptyWorkspaceState' })
 
 interface Emits {
   (e: 'create-workspace'): void

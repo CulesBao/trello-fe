@@ -1,34 +1,27 @@
 import type { BaseEntity } from './common';
-import type { User } from './user';
 
 // Board Types
 export interface Board extends BaseEntity {
-  title: string;
-  description?: string;
-  background?: string;
-  isPublic: boolean;
-  isFavorite: boolean;
-  ownerId: string;
-  owner?: User;
-  members: BoardMember[];
-  visibility: 'private' | 'team' | 'public';
-  teamId?: string;
+  name: string;
+  description: string;
+  workspaceId: number
+  admin: User
+  users: User[]
+  lists: List[]
 }
-
-export interface BoardMember {
-  userId: string;
-  user?: User;
-  role: 'owner' | 'admin' | 'member' | 'observer';
-  joinedAt: string;
+interface User {
+  id: number
+  name: string
+  email: string
 }
-
+interface List {
+  id: number
+  name: string
+}
 export interface CreateBoardRequest {
-  title: string;
+  name: string;
   description?: string;
-  background?: string;
-  isPublic?: boolean;
-  visibility?: 'private' | 'team' | 'public';
-  teamId?: string;
+  workspaceId: number
 }
 
 export interface UpdateBoardRequest {
@@ -42,30 +35,4 @@ export interface UpdateBoardRequest {
 export interface AddBoardMemberRequest {
   userId: string;
   role: 'admin' | 'member' | 'observer';
-}
-
-// List Types
-export interface List extends BaseEntity {
-  title: string;
-  position: number;
-  boardId: string;
-  board?: Board;
-  isArchived: boolean;
-}
-
-export interface CreateListRequest {
-  title: string;
-  boardId: string;
-  position?: number;
-}
-
-export interface UpdateListRequest {
-  title?: string;
-  position?: number;
-  isArchived?: boolean;
-}
-
-export interface ReorderListRequest {
-  position: number;
-  boardId: string;
 }

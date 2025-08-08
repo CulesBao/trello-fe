@@ -13,32 +13,29 @@ import {
 } from '@/components/ui/sidebar'
 
 import WorkspaceDialog from '@/components/dialogs/WorkspaceDialog.vue'
+import BoardDialog from '@/components/dialogs/BoardDialog.vue'
 
 defineProps<{
   projects: {
     name: string
     url: string
     icon: LucideIcon
+    isDialog?: boolean
   }[]
 }>()
 
-const emit = defineEmits<{
-  workspaceCreated: []
-}>()
 
 const isDialogOpen = ref(false)
+const activeDialog = ref<'workspace' | 'board' | null>(null)
 
-const handleItemClick = (item: { name: string; url: string; icon: LucideIcon }) => {
-  if (item.name === 'New workspace') {
-    isDialogOpen.value = true
+const handleItemClick = (item: { name: string; url: string; icon: LucideIcon; isDialog?: boolean; form?: 'workspace' | 'board' }) => {
+  if (item.isDialog) {
+  isDialogOpen.value = true
+  activeDialog.value = item.form ?? (item.name.toLowerCase().includes('board') ? 'board' : 'workspace')
   } else {
     // Navigate to other items
     window.location.href = item.url
   }
-}
-
-const handleWorkspaceCreated = () => {
-  emit('workspaceCreated')
 }
 
 </script>
@@ -58,7 +55,11 @@ const handleWorkspaceCreated = () => {
 
   <!-- Workspace Dialog -->
   <WorkspaceDialog
+    v-if="activeDialog === 'workspace'"
     v-model:open="isDialogOpen"
-    @workspace-created="handleWorkspaceCreated"
+  />
+  <BoardDialog
+    v-if="activeDialog === 'board'"
+    v-model:open="isDialogOpen"
   />
 </template>

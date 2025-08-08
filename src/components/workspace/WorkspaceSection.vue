@@ -2,11 +2,10 @@
 import WorkspaceHeader from './WorkspaceHeader.vue'
 import BoardGrid from './BoardGrid.vue'
 import type { Workspace } from '@/api/types/workspace'
-import type { Board } from '@/api/types/board'
+defineOptions({ name: 'WorkspaceSection' })
 
 interface Props {
   workspace: Workspace
-  boards: Board[]
 }
 
 interface Emits {
@@ -14,7 +13,7 @@ interface Emits {
   (e: 'navigate-to-members', workspaceId: string): void
   (e: 'navigate-to-settings', workspaceId: string): void
   (e: 'create-board', workspaceId: string): void
-  (e: 'board-click', board: Board): void
+  (e: 'board-click', board: { id: number | string; name: string; description?: string }): void
 }
 
 const props = defineProps<Props>()
@@ -36,7 +35,7 @@ const handleCreateBoard = () => {
   emit('create-board', props.workspace.id)
 }
 
-const handleBoardClick = (board: Board) => {
+const handleBoardClick = (board: { id: number | string; name: string; description?: string }) => {
   emit('board-click', board)
 }
 </script>
@@ -53,7 +52,7 @@ const handleBoardClick = (board: Board) => {
 
     <!-- Workspace Boards -->
     <BoardGrid
-      :boards="props.boards"
+      :boards="workspace.boards"
       @create-board="handleCreateBoard"
       @board-click="handleBoardClick"
     />

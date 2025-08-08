@@ -2,6 +2,7 @@
 import { Users, Settings, Grid3x3 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import type { Workspace } from '@/api/types/workspace'
+defineOptions({ name: 'WorkspaceHeader' })
 
 interface Props {
   workspace: Workspace

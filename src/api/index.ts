@@ -9,7 +9,6 @@ export {
   AuthService,
   UserService,
   BoardService,
-  ListService,
   CardService,
   CommentService,
   NotificationService,
