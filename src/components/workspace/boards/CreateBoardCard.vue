@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { Plus } from 'lucide-vue-next'
   import { Card, CardContent } from '@/components/ui/card'
-  import BoardDialog from '../dialogs/BoardDialog.vue'
+  import BoardDialog from '../../dialogs/BoardDialog.vue'
   defineOptions({ name: 'CreateBoardCard' })
 
   const isDialogOpen = ref(false)

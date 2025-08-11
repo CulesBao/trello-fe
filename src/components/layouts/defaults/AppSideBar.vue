@@ -8,6 +8,10 @@
   import TeamSwitcher from '@/components/layouts/defaults/TeamSwitcher.vue'
   import { UserService } from '@/api'
   import { useUserStore } from '@/stores/user'
+  import { Bell } from 'lucide-vue-next'
+  import NotificationSheet from '@/components/notifications/NotificationSheet.vue'
+  import Button from '@/components/ui/button/Button.vue'
+  import { useNotificationLogStore } from '@/stores/notificationLog'
 
   import {
     Sidebar,
@@ -22,6 +26,8 @@
   })
 
   const userStore = useUserStore()
+  const logStore = useNotificationLogStore()
+  const open = ref(false)
   onMounted(async () => {
     await UserService.getMyProfile()
   })
@@ -65,13 +71,22 @@
       <NavWorkspace />
     </SidebarContent>
     <SidebarFooter>
-      <NavUser
-        :user="{
-          name: userStore.user?.name || 'Anonymous',
-          email: userStore.user?.email || 'No Email',
-          avatar: userStore.getShortName(),
-        }"
-      />
+      <div class="flex w-full items-center gap-2 px-2">
+        <Button size="icon" variant="ghost" class="relative" @click="open = true">
+          <Bell class="h-5 w-5" />
+          <span
+            v-if="logStore.recent.length"
+            class="absolute -top-1 -right-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white"
+          >{{ logStore.recent.length > 99 ? '99+' : logStore.recent.length }}</span>
+        </Button>
+        <NavUser
+          :user="{
+            name: userStore.user?.name || 'Anonymous',
+            email: userStore.user?.email || 'No Email',
+          }"
+        />
+      </div>
+  <NotificationSheet v-model:open="open" />
     </SidebarFooter>
     <SidebarRail />
   </Sidebar>

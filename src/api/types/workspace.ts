@@ -11,6 +11,7 @@ export interface Workspace extends BaseEntity {
 export interface WorkspaceMember {
   id: number
   email: string
+  name: string
 }
 interface Board {
   id: number
@@ -28,6 +29,5 @@ export interface UpdateWorkspaceRequest {
 }
 
 export interface AddWorkspaceMemberRequest {
-  userId: string
-  role: 'admin' | 'member'
+  email: string
 }

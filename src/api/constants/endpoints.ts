@@ -103,28 +103,3 @@ export const API_ENDPOINTS = {
     BOARDS: (id: string) => `/workspaces/${id}/boards`,
   },
 } as const
-
-// API Response Status Codes
-export const HTTP_STATUS = {
-  OK: 200,
-  CREATED: 201,
-  NO_CONTENT: 204,
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  FORBIDDEN: 403,
-  NOT_FOUND: 404,
-  CONFLICT: 409,
-  UNPROCESSABLE_ENTITY: 422,
-  INTERNAL_SERVER_ERROR: 500,
-} as const
-
-// API Error Messages
-export const API_ERROR_MESSAGES = {
-  NETWORK_ERROR: 'Lỗi kết nối mạng',
-  UNAUTHORIZED: 'Phiên đăng nhập đã hết hạn',
-  FORBIDDEN: 'Bạn không có quyền truy cập',
-  NOT_FOUND: 'Không tìm thấy dữ liệu',
-  VALIDATION_ERROR: 'Dữ liệu không hợp lệ',
-  SERVER_ERROR: 'Lỗi máy chủ, vui lòng thử lại sau',
-  UNKNOWN_ERROR: 'Đã xảy ra lỗi không xác định',
-} as const

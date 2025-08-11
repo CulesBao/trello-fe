@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import WorkspaceHeader from './WorkspaceHeader.vue'
-  import BoardGrid from './BoardGrid.vue'
+  import BoardGrid from './boards/BoardGrid.vue'
   import type { Workspace } from '@/api/types/workspace'
   defineOptions({ name: 'WorkspaceSection' })
 

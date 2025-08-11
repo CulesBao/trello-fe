@@ -26,7 +26,7 @@
 <template>
   <div class="flex flex-col gap-8 p-8">
     <div class="flex items-center justify-between mb-2">
-      <h1 class="text-3xl font-bold tracking-tight">My Workspaces</h1>
+      <h1 class="text-3xl font-bold">My Workspaces</h1>
     </div>
 
     <!-- All Workspaces -->

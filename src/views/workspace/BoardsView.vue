@@ -1,23 +1,18 @@
 <script setup lang="ts">
   import { onMounted, computed } from 'vue'
   import { useRoute } from 'vue-router'
-  import { useWorkspaceStore } from '@/stores/workspace'
   import { WorkspaceHeaderInfo } from '@/components/workspace'
-  import BoardGrid from '@/components/workspace/BoardGrid.vue'
+  import BoardGrid from '@/components/workspace/boards/BoardGrid.vue'
+import { WorkspaceService } from '@/api/services'
 
   const route = useRoute()
-  const workspaceStore = useWorkspaceStore()
 
   const workspaceId = computed(() => route.params.id as string)
 
-  const currentWorkspace = computed(() =>
-    workspaceStore.workspaces.find((w) => String(w.id) === workspaceId.value)
-  )
+  const currentWorkspace = ref()
 
   onMounted(async () => {
-    if (!workspaceStore.workspaces.length) {
-      await workspaceStore.loadWorkspaces()
-    }
+    currentWorkspace.value = await WorkspaceService.getWorkspaceById(workspaceId.value)
   })
 
   const handleBoardClick = (board: { id: number | string; name: string; description?: string }) => {

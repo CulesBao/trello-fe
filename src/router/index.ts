@@ -14,10 +14,16 @@ const router = createRouter({
           component: () => import('@/components/workspace/MyWorkspaceLayout.vue'),
         },
         {
-          path: 'workspaces/:id/boards',
+          path: 'workspace/:id/boards',
           name: 'WorkspaceBoards',
           component: () => import('../views/workspace/BoardsView.vue'),
           meta: { title: 'Boards' },
+        },
+        {
+          path: 'workspace/:id/members',
+          name: 'WorkspaceMembers',
+          component: () => import('@/views/workspace/MemberView.vue'),
+          meta: { title: 'Members' },
         },
       ],
     },
