@@ -66,9 +66,7 @@
     filterState.filtered.count = itemCount
   }
 
-  function handleSelect() {
-    filterState.search = ''
-  }
+  // Note: previously had a handleSelect() to clear search on select; not used currently.
 
   watch(
     () => filterState.search,

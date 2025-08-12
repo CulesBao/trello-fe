@@ -18,6 +18,12 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   {
+    name: 'vue/rules',
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+  {
     name: 'prettier/integration',
     rules: {
       // Disable ESLint rules that might conflict with Prettier
