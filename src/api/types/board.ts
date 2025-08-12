@@ -14,7 +14,7 @@ interface User {
   name: string
   email: string
 }
-interface List {
+export interface List {
   id: number
   name: string
 }
