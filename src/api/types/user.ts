@@ -42,9 +42,3 @@ export interface UpdateUserRequest {
   isActive?: boolean
   role?: 'admin' | 'user' | 'moderator'
 }
-
-export interface ChangePasswordRequest {
-  currentPassword: string
-  newPassword: string
-  confirmPassword: string
-}

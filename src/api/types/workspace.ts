@@ -8,7 +8,7 @@ export interface Workspace extends BaseEntity {
   boards: Board[]
 }
 
-export interface WorkspaceMember {
+interface WorkspaceMember {
   id: number
   email: string
   name: string

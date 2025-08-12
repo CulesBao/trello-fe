@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { onMounted, computed } from 'vue'
   import { useRoute } from 'vue-router'
-  import { WorkspaceHeaderInfo } from '@/components/workspace'
-  import BoardGrid from '@/components/workspace/boards/BoardGrid.vue'
+  import WorkspaceHeader from '@/features/workspace/components/WorkspaceHeader.vue'
+  import BoardGrid from '@/features/workspace/components/boards/BoardGrid.vue'
   import { WorkspaceService } from '@/api/services'
 
   const route = useRoute()
@@ -21,12 +21,9 @@
 </script>
 
 <template>
-  <div class="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8 flex flex-col gap-6">
+  <div class="mx-auto w-full px-4 py-6 md:px-8 md:py-8 flex flex-col gap-6">
     <div class="flex items-center justify-between">
-      <WorkspaceHeaderInfo
-        :name="currentWorkspace?.name || 'Workspace'"
-        :description="currentWorkspace?.description || ''"
-      />
+      <WorkspaceHeader v-if="currentWorkspace" :workspace="currentWorkspace" :show-actions="true" />
     </div>
     <BoardGrid :boards="currentWorkspace?.boards || []" @board-click="handleBoardClick" />
   </div>

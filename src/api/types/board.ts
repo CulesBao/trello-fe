@@ -14,7 +14,7 @@ interface User {
   name: string
   email: string
 }
-export interface List {
+interface List {
   id: number
   name: string
 }
@@ -25,14 +25,10 @@ export interface CreateBoardRequest {
 }
 
 export interface UpdateBoardRequest {
-  title?: string
-  description?: string
-  background?: string
-  isPublic?: boolean
-  visibility?: 'private' | 'team' | 'public'
+  name: string
+  description: string
 }
 
 export interface AddBoardMemberRequest {
   userId: string
-  role: 'admin' | 'member' | 'observer'
 }

@@ -6,9 +6,6 @@ export const API_ENDPOINTS = {
     REGISTER: '/auth/register',
     LOGOUT: '/auth/logout',
     UPDATE_PROFILE: '/auth/profile',
-    CHANGE_PASSWORD: '/auth/change-password',
-    FORGOT_PASSWORD: '/auth/forgot-password',
-    RESET_PASSWORD: '/auth/reset-password',
   },
 
   // User Management

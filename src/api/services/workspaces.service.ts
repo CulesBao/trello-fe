@@ -11,9 +11,6 @@ import type { Board } from '../types/board'
 import type { ApiResponse } from '../types/common'
 
 export class WorkspaceService {
-  /**
-   * Get list of workspaces
-   */
   static async getWorkspaces(): Promise<Workspace[]> {
     const response = await $get<ApiResponse<Workspace[]>>(API_ENDPOINTS.WORKSPACES.LIST)
     return response.data.data

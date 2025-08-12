@@ -11,24 +11,24 @@ const router = createRouter({
         {
           path: '',
           name: 'Home',
-          component: () => import('@/components/workspace/MyWorkspaceLayout.vue'),
+          component: () => import('@/features/workspace/components/MyWorkspaceLayout.vue'),
         },
         {
           path: 'w/:id/boards',
           name: 'WorkspaceBoards',
-          component: () => import('../views/workspace/BoardsView.vue'),
+          component: () => import('@/features/workspace/views/BoardsView.vue'),
           meta: { title: 'Boards' },
         },
         {
           path: 'w/:id/members',
           name: 'WorkspaceMembers',
-          component: () => import('@/views/workspace/MemberView.vue'),
+          component: () => import('@/features/workspace/views/MemberView.vue'),
           meta: { title: 'Members' },
         },
         {
           path: 'w/:id/settings',
           name: 'WorkspaceSettings',
-          component: () => import('@/views/workspace/WorkspaceSettingsView.vue'),
+          component: () => import('@/features/workspace/views/WorkspaceSettingsView.vue'),
           meta: { title: 'Settings' },
         },
       ],

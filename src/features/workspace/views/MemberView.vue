@@ -2,8 +2,8 @@
   import type { Workspace } from '@/api'
   import { WorkspaceService } from '@/api/services'
   import Separator from '@/components/ui/separator/Separator.vue'
-  import AddMemberToWorkspace from '@/components/workspace/members/AddMemberToWorkspace.vue'
-  import MembersCard from '@/components/workspace/members/MembersCard.vue'
+  import AddMemberToWorkspace from '@/features/workspace/components/members/AddMemberToWorkspace.vue'
+  import MembersCard from '@/features/workspace/components/members/MembersCard.vue'
   import ConfirmDialog from '@/components/ui/confirm/ConfirmDialog.vue'
 
   const route = useRoute()
