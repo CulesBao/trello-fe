@@ -18,7 +18,7 @@
     useSidebar,
   } from '@/components/ui/sidebar'
   import { useAuthStore } from '@/stores/auth'
-import { getShortName } from '@/utils/shortName'
+  import { getShortName } from '@/utils/shortName'
 
   defineProps<{
     user: {

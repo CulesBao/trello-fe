@@ -77,7 +77,8 @@
           <span
             v-if="logStore.recent.length"
             class="absolute -top-1 -right-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white"
-          >{{ logStore.recent.length > 99 ? '99+' : logStore.recent.length }}</span>
+            >{{ logStore.recent.length > 99 ? '99+' : logStore.recent.length }}</span
+          >
         </Button>
         <NavUser
           :user="{
@@ -86,7 +87,7 @@
           }"
         />
       </div>
-  <NotificationSheet v-model:open="open" />
+      <NotificationSheet v-model:open="open" />
     </SidebarFooter>
     <SidebarRail />
   </Sidebar>

@@ -24,15 +24,15 @@
       <div class="flex items-center gap-3">
         <Button variant="outline" class="flex items-center gap-2 px-4 py-2">
           <Grid3x3 class="h-4 w-4" />
-          <a :href="`/workspace/${workspace.id}/boards`"> Boards </a>
+          <a :href="`/w/${workspace.id}/boards`"> Boards </a>
         </Button>
         <Button variant="outline" class="flex items-center gap-2 px-4 py-2">
           <Users class="h-4 w-4" />
-          Members
+          <a :href="`/w/${workspace.id}/members`"> Members </a>
         </Button>
         <Button variant="outline" class="flex items-center gap-2 px-4 py-2">
           <Settings class="h-4 w-4" />
-          Settings
+          <a :href="`/w/${workspace.id}/settings`"> Settings </a>
         </Button>
       </div>
     </div>

@@ -41,7 +41,7 @@
 
   const onSubmit = async (values: Record<string, unknown>) => {
     const formData = values as FormData
-    const response = await $post('/auth/register', formData, 'Registration successful')
+    const response = await $post('/auth/register', formData)
     localStorage.setItem('accessToken', response.data.token)
   }
 </script>

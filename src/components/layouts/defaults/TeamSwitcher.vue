@@ -1,10 +1,17 @@
 <script setup lang="ts">
   import TrelloLogo from '@/assets/trello_logo.png'
   import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push('/')
+  }
 </script>
 
 <template>
-  <SidebarMenu>
+  <SidebarMenu @click="handleClick">
     <SidebarMenuItem>
       <SidebarMenuButton size="lg" class="cursor-default">
         <div

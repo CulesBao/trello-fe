@@ -37,17 +37,14 @@
         >
           {{ props.member.name }}
         </h3>
-        <p
-          class="text-xs text-muted-foreground/90 truncate max-w-full"
-          :title="props.member.email"
-        >
+        <p class="text-xs text-muted-foreground/90 truncate max-w-full" :title="props.member.email">
           {{ props.member.email }}
         </p>
       </div>
     </div>
 
     <div class="mr-auto flex flex-end items-center gap-2">
-  <Button @click="onRemove" size="sm" variant="destructive">Remove</Button>
+      <Button @click="onRemove" size="sm" variant="destructive">Remove</Button>
     </div>
   </div>
 </template>

@@ -35,9 +35,9 @@
       shortName: getShortName(workspace.name),
       isActive: false,
       items: [
-        { title: 'Boards', url: `/workspace/${workspace.id}/boards` },
-        { title: 'Members', url: `/workspace/${workspace.id}/members` },
-        { title: 'Settings', url: `/workspace/${workspace.id}/settings` },
+        { title: 'Boards', url: `/w/${workspace.id}/boards` },
+        { title: 'Members', url: `/w/${workspace.id}/members` },
+        { title: 'Settings', url: `/w/${workspace.id}/settings` },
       ],
     }))
   })
