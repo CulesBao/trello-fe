@@ -19,9 +19,7 @@
 <template>
   <div class="flex items-center justify-between bg-muted/30 rounded-lg p-6">
     <div class="group flex items-center gap-5 min-w-0">
-      <Avatar
-        class="h-14 w-14 ring-2 ring-background shadow-sm shadow-black/5 overflow-hidden"
-      >
+      <Avatar class="h-14 w-14 ring-2 ring-background shadow-sm shadow-black/5 overflow-hidden">
         <AvatarFallback
           :class="[
             'text-sm font-medium tracking-wide text-white flex items-center justify-center select-none',

@@ -22,15 +22,6 @@ export interface UserProfile {
   updatedAt?: Date
 }
 
-export interface CreateUserRequest {
-  email: string
-  username: string
-  firstName: string
-  lastName: string
-  password: string
-  role?: 'admin' | 'user' | 'moderator'
-}
-
 export interface UpdateUserRequest {
   username?: string
   firstName?: string

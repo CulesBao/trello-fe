@@ -81,12 +81,3 @@ export interface Comment extends BaseEntity {
   isEdited: boolean
   editedAt?: string
 }
-
-export interface CreateCommentRequest {
-  content: string
-  cardId: string
-}
-
-export interface UpdateCommentRequest {
-  content: string
-}

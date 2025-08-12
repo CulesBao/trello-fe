@@ -38,7 +38,6 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/lists/${id}`,
     DELETE: (id: string) => `/lists/${id}`,
     BY_BOARD: (boardId: string) => `/boards/${boardId}/lists`,
-    REORDER: (id: string) => `/lists/${id}/reorder`,
   },
 
   // Card Management
@@ -77,14 +76,6 @@ export const API_ENDPOINTS = {
     LIST: '/activities',
     BY_BOARD: (boardId: string) => `/boards/${boardId}/activities`,
     BY_CARD: (cardId: string) => `/cards/${cardId}/activities`,
-  },
-
-  // Notifications
-  NOTIFICATIONS: {
-    LIST: '/notifications',
-    MARK_READ: (id: string) => `/notifications/${id}/read`,
-    MARK_ALL_READ: '/notifications/read-all',
-    DELETE: (id: string) => `/notifications/${id}`,
   },
 
   WORKSPACES: {
