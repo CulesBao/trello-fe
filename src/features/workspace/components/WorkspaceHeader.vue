@@ -2,9 +2,9 @@
   import { Users, Settings, Grid3x3 } from 'lucide-vue-next'
   import { Button } from '@/components/ui/button'
   import type { Workspace } from '@/api/types/workspace'
-  import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-  import { getShortName } from '@/utils/shortName'
   import { RouterLink } from 'vue-router'
+  import { computed, type Component } from 'vue'
+  import AvatarInitials from '@/components/ui/avatar/AvatarInitials.vue'
   defineOptions({ name: 'WorkspaceHeader' })
 
   interface Props {
@@ -14,20 +14,23 @@
   const props = withDefaults(defineProps<Props>(), {
     showActions: true,
   })
+
+  const actions = computed<{ label: string; to: string; icon: Component }[]>(() => [
+    { label: 'Boards', to: `/w/${props.workspace.id}/boards`, icon: Grid3x3 },
+    { label: 'Members', to: `/w/${props.workspace.id}/members`, icon: Users },
+    { label: 'Settings', to: `/w/${props.workspace.id}/settings`, icon: Settings },
+  ])
 </script>
 
 <template>
-  <div class="flex items-center justify-between bg-muted/30 rounded-lg p-6">
+  <div
+    class="flex items-center justify-between bg-card/60 text-card-foreground border border-border/70 rounded-lg p-6 shadow-sm"
+  >
     <div class="group flex items-center gap-5 min-w-0">
-      <Avatar class="h-14 w-14 ring-2 ring-background shadow-sm shadow-black/5 overflow-hidden">
-        <AvatarFallback
-          :class="[
-            'text-sm font-medium tracking-wide text-white flex items-center justify-center select-none',
-          ]"
-        >
-          {{ getShortName(props.workspace.name) }}
-        </AvatarFallback>
-      </Avatar>
+      <AvatarInitials
+        :name="props.workspace.name"
+        class="h-14 w-14 ring-1 ring-border shadow-sm shadow-black/5 overflow-hidden"
+      />
       <div class="flex flex-col min-w-0">
         <div class="flex items-center gap-3">
           <h2
@@ -46,22 +49,16 @@
     </div>
     <div v-if="props.showActions" class="flex items-center gap-3">
       <div class="flex items-center gap-3">
-        <Button variant="outline" class="flex items-center gap-2 px-4 py-2" as-child>
-          <RouterLink :to="`/w/${props.workspace.id}/boards`">
-            <Grid3x3 class="h-4 w-4" />
-            Boards
-          </RouterLink>
-        </Button>
-        <Button variant="outline" class="flex items-center gap-2 px-4 py-2" as-child>
-          <RouterLink :to="`/w/${props.workspace.id}/members`">
-            <Users class="h-4 w-4" />
-            Members
-          </RouterLink>
-        </Button>
-        <Button variant="outline" class="flex items-center gap-2 px-4 py-2" as-child>
-          <RouterLink :to="`/w/${props.workspace.id}/settings`">
-            <Settings class="h-4 w-4" />
-            Settings
+        <Button
+          v-for="item in actions"
+          :key="item.to"
+          variant="outline"
+          class="flex items-center gap-2 px-4 py-2 border-border/60 text-muted-foreground bg-transparent hover:bg-accent/20 hover:text-foreground"
+          as-child
+        >
+          <RouterLink :to="item.to">
+            <component :is="item.icon" class="h-4 w-4" />
+            {{ item.label }}
           </RouterLink>
         </Button>
       </div>

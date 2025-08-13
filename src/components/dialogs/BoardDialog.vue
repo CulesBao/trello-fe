@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import {
     Dialog,
     DialogContent,
@@ -73,18 +72,22 @@
 
 <template>
   <Dialog :open="props.open" @update:open="emit('update:open', $event)">
-    <DialogContent>
+    <DialogContent class="bg-card text-card-foreground border border-border/70 shadow-sm">
       <DialogHeader>
-        <DialogTitle>Create New Board</DialogTitle>
-        <DialogDescription>
+        <DialogTitle class="text-foreground">Create New Board</DialogTitle>
+        <DialogDescription class="text-muted-foreground">
           Enter details for your new board. You can invite team members later.
         </DialogDescription>
       </DialogHeader>
 
-      <Form @submit="onSubmit" :validation-schema="validationSchema" class="grid gap-4 py-4">
+      <Form
+        @submit="onSubmit"
+        :validation-schema="validationSchema"
+        class="grid gap-4 py-2 md:py-3"
+      >
         <FormField v-slot="{ componentField }" name="title">
           <FormItem>
-            <FormLabel>Board Name</FormLabel>
+            <FormLabel class="text-muted-foreground">Board Name</FormLabel>
             <FormControl>
               <Input
                 v-bind="componentField"
@@ -98,7 +101,7 @@
 
         <FormField v-slot="{ componentField }" name="description">
           <FormItem>
-            <FormLabel>Description (Optional)</FormLabel>
+            <FormLabel class="text-muted-foreground">Description (Optional)</FormLabel>
             <FormControl>
               <Input
                 v-bind="componentField"
@@ -112,11 +115,11 @@
 
         <FormField v-slot="{ componentField }" name="workspaceId">
           <FormItem>
-            <FormLabel>Workspace</FormLabel>
+            <FormLabel class="text-muted-foreground">Workspace</FormLabel>
             <FormControl>
               <select
                 v-bind="componentField"
-                class="w-full h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                class="w-full h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-xs focus:outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
                 :disabled="isCreating"
               >
                 <option value="" disabled selected>Select a workspace</option>
@@ -133,7 +136,7 @@
           </FormItem>
         </FormField>
 
-        <div class="flex justify-end gap-2 pt-4">
+        <div class="flex justify-end gap-2 pt-2 md:pt-3">
           <Button type="button" variant="outline" @click="closeDialog" :disabled="isCreating">
             Cancel
           </Button>

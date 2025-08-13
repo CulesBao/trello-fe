@@ -39,7 +39,7 @@
   <Dialog :open="props.open" @update:open="(v: boolean) => emit('update:open', v)">
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{{ props.title }}</DialogTitle>
+        <DialogTitle class="text-lg font-semibold text-foreground">{{ props.title }}</DialogTitle>
         <DialogDescription v-if="props.description">{{ props.description }}</DialogDescription>
       </DialogHeader>
       <DialogFooter class="flex justify-end gap-2">

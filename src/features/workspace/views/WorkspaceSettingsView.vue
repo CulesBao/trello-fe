@@ -76,9 +76,11 @@
 </script>
 
 <template>
-  <div class="flex flex-col mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8 gap-4">
+  <div
+    class="flex flex-col mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8 gap-4 text-foreground/90"
+  >
     <div class="mb-4 md:mb-6">
-      <h1 class="text-2xl font-semibold tracking-tight">Workspace settings</h1>
+      <h1 class="text-2xl font-semibold tracking-tight text-foreground">Workspace settings</h1>
       <p class="text-sm text-muted-foreground">
         Update your workspace details or delete it permanently.
       </p>

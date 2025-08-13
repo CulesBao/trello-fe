@@ -52,22 +52,24 @@
 </script>
 
 <template>
-  <div class="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8 flex flex-col gap-6">
+  <div
+    class="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8 flex flex-col gap-6 text-foreground/90"
+  >
     <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-semibold tracking-tight">Members in workspace</h1>
+      <h1 class="text-2xl font-semibold tracking-tight text-foreground">Members in workspace</h1>
     </div>
     <div class="flex items-center justify-between">
-      <h3 class="text-l font-bold">
+      <h3 class="text-sm md:text-base font-medium text-muted-foreground">
         Anyone with an invitation link can join this free workspace. You can also disable and create
         a new invitation link for this workspace at any time. The number of pending invitations
         counts towards the limit of 10 collaborators.
       </h3>
     </div>
-    <Separator class="my-3" />
+    <Separator class="my-3 opacity-60" />
     <div class="flex flex-col gap-5 w-full">
       <AddMemberToWorkspace @member-added="onAddMember" />
       <Separator />
-      <h3 class="text-lg font-semibold">Admin ({{ admins.length }})</h3>
+      <h3 class="text-lg font-semibold text-foreground">Admin ({{ admins.length }})</h3>
       <div class="flex flex-col gap-3">
         <MembersCard
           v-for="m in admins"
@@ -76,7 +78,7 @@
           @remove="onRemoveMember"
         />
       </div>
-      <h3 class="text-lg font-semibold">Members ({{ members.length }})</h3>
+      <h3 class="text-lg font-semibold text-foreground">Members ({{ members.length }})</h3>
       <div class="flex flex-col gap-3">
         <MembersCard
           v-for="m in members"

@@ -18,7 +18,12 @@
     data-slot="sidebar-trigger"
     variant="ghost"
     size="icon"
-    :class="cn('h-7 w-7', props.class)"
+    :class="
+      cn(
+        'h-7 w-7 bg-transparent text-muted-foreground hover:text-foreground hover:bg-accent/20 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+        props.class
+      )
+    "
     @click="toggleSidebar"
   >
     <PanelLeft />

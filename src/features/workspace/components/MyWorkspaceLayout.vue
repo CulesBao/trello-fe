@@ -1,10 +1,8 @@
 <script setup lang="ts">
   import WorkspaceSection from './WorkspaceSection.vue'
   import EmptyWorkspaceState from './EmptyWorkspaceState.vue'
-  // Board click in this layout only needs id/name/description
   import { useWorkspaceStore } from '@/stores/workspace'
   import BoardDialog from '@/components/dialogs/BoardDialog.vue'
-  import { ref } from 'vue'
   defineOptions({ name: 'WorkspaceLayout' })
 
   const workspaceStore = useWorkspaceStore()
@@ -26,11 +24,11 @@
 <template>
   <div class="flex flex-col gap-8 p-8">
     <div class="flex items-center justify-between mb-2">
-      <h1 class="text-3xl font-bold">My Workspaces</h1>
+      <h1 class="text-3xl font-semibold tracking-tight text-foreground/90">My Workspaces</h1>
     </div>
 
     <!-- All Workspaces -->
-    <div v-if="workspaceStore.workspaces.length > 0" class="space-y-12">
+    <div v-if="workspaceStore.workspaces.length > 0" class="flex flex-col gap-12">
       <WorkspaceSection
         v-for="workspace in workspaceStore.workspaces"
         :key="workspace.id"

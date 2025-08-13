@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="flex flex-col gap-8">
     <WorkspaceHeader :workspace="props.workspace" />
 
     <BoardGrid :boards="workspace.boards" />

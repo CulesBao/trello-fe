@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import {
     Dialog,
     DialogContent,
@@ -75,18 +74,22 @@
 
 <template>
   <Dialog :open="props.open" @update:open="emit('update:open', $event)">
-    <DialogContent>
+    <DialogContent class="bg-card text-card-foreground border border-border/70 shadow-sm">
       <DialogHeader>
-        <DialogTitle>Create New Workspace</DialogTitle>
-        <DialogDescription>
+        <DialogTitle class="text-foreground">Create New Workspace</DialogTitle>
+        <DialogDescription class="text-muted-foreground">
           Enter details for your new workspace. You can invite team members later.
         </DialogDescription>
       </DialogHeader>
 
-      <Form @submit="onSubmit" :validation-schema="validationSchema" class="grid gap-4 py-4">
+      <Form
+        @submit="onSubmit"
+        :validation-schema="validationSchema"
+        class="grid gap-4 py-2 md:py-3"
+      >
         <FormField v-slot="{ componentField }" name="name">
           <FormItem>
-            <FormLabel>Workspace Name</FormLabel>
+            <FormLabel class="text-muted-foreground">Workspace Name</FormLabel>
             <FormControl>
               <Input
                 v-bind="componentField"
@@ -100,7 +103,7 @@
 
         <FormField v-slot="{ componentField }" name="description">
           <FormItem>
-            <FormLabel>Description (Optional)</FormLabel>
+            <FormLabel class="text-muted-foreground">Description (Optional)</FormLabel>
             <FormControl>
               <Input
                 v-bind="componentField"
@@ -112,7 +115,7 @@
           </FormItem>
         </FormField>
 
-        <div class="flex justify-end gap-2 pt-4">
+        <div class="flex justify-end gap-2 pt-2 md:pt-3">
           <Button type="button" variant="outline" @click="closeDialog" :disabled="isCreating">
             Cancel
           </Button>

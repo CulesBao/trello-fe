@@ -33,6 +33,7 @@
           size="sm"
           @click="logStore.clear()"
           :disabled="!logStore.recent.length"
+          class="text-sm font-semibold text-foreground"
           >Clear</Button
         >
         <Button size="sm" @click="close">Close</Button>

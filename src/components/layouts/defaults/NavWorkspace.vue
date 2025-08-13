@@ -13,13 +13,12 @@
   } from '@/components/ui/sidebar'
   import { useWorkspaceStore } from '@/stores/workspace'
   import type { Workspace } from '@/api'
-  import { getShortName } from '@/utils/shortName'
+  import AvatarInitials from '@/components/ui/avatar/AvatarInitials.vue'
 
   interface ProjectItem {
     id: string
     title: string
     isActive: boolean
-    shortName: string
     items: {
       title: string
       url: string
@@ -32,7 +31,6 @@
     items.value = (list ?? []).map((workspace: Workspace) => ({
       id: workspace.id,
       title: workspace.name,
-      shortName: getShortName(workspace.name),
       isActive: false,
       items: [
         { title: 'Boards', url: `/w/${workspace.id}/boards` },
@@ -57,7 +55,10 @@
         <SidebarMenuItem>
           <CollapsibleTrigger as-child>
             <SidebarMenuButton :tooltip="item.title">
-              <AvatarFallback>{{ item.shortName }}</AvatarFallback>
+              <AvatarInitials
+                :name="item.title"
+                class="size-8 rounded-lg shrink-0 group-data-[collapsible=icon]:size-6"
+              />
               <span>{{ item.title }}</span>
               <ChevronRight
                 class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
