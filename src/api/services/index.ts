@@ -5,7 +5,6 @@ export { BoardService } from './board.service'
 export { CardService } from './card.service'
 export { CommentService } from './comment.service'
 export { WorkspaceService } from './workspaces.service'
-export { FileService } from './file.service'
 export { ListService } from './list.service'
 
 // Export default services for convenience
@@ -15,5 +14,4 @@ export { default as Board } from './board.service'
 export { default as Card } from './card.service'
 export { default as Comment } from './comment.service'
 export { default as Workspace } from './workspaces.service'
-export { default as File } from './file.service'
 export { default as List } from './list.service'

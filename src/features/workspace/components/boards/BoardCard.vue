@@ -15,7 +15,8 @@
 </script>
 
 <template>
-  <Card @click="onBoardClick(board.id, board.name)"
+  <Card
+    @click="onBoardClick(board.id, board.name)"
     class="cursor-pointer hover:shadow-lg transition-all duration-200 min-h-[140px] border hover:border-primary/50"
   >
     <CardHeader class="pb-3">

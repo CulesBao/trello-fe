@@ -28,18 +28,6 @@ export interface Activity extends BaseEntity {
   boardId?: string
 }
 
-// File Upload Types
-export interface FileUploadResponse {
-  id: string
-  filename: string
-  originalName: string
-  mimeType: string
-  size: number
-  url: string
-  uploadedAt: string
-}
-
-// Comment Types
 export interface MiscComment extends BaseEntity {
   content: string
   userId: string
@@ -54,5 +42,5 @@ export interface MiscCreateCommentRequest {
 }
 
 export interface MiscUpdateCommentRequest {
-  content?: string
+  content: string
 }

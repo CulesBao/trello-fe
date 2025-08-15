@@ -8,7 +8,6 @@ export {
   BoardService,
   CardService,
   CommentService,
-  FileService,
 } from './services'
 
 export * from './constants'

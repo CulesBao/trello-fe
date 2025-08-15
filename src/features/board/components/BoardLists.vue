@@ -45,13 +45,27 @@
         :key="l.id"
         :list="l"
         @changed="emit('refresh')"
-        @delete-list="async (id) => { await ListService.deleteList(String(id)); emit('refresh') }"
+        @delete-list="
+          async (id) => {
+            await ListService.deleteList(String(id))
+            emit('refresh')
+          }
+        "
       />
       <div class="w-72 shrink-0 rounded-lg bg-muted/40 border border-dashed border-border/60 p-2">
         <CreateListForm
           :board-id="props.boardId"
           :loading="loading"
-          @create="async (payload) => { await ListService.createList({ name: payload.name, boardId: String(payload.boardId), order: lastOrder }); emit('refresh') }"
+          @create="
+            async (payload) => {
+              await ListService.createList({
+                name: payload.name,
+                boardId: String(payload.boardId),
+                order: lastOrder,
+              })
+              emit('refresh')
+            }
+          "
         />
       </div>
     </div>

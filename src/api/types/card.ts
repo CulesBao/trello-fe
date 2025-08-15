@@ -8,7 +8,6 @@ export interface Card extends BaseEntity {
   comments: Comment[]
   checkLists: CheckList[]
   attachments: Attachment[]
-
 }
 interface List {
   id: number
@@ -44,20 +43,7 @@ export interface CreateCardRequest {
 }
 
 export interface UpdateCardRequest {
-  title?: string
-  description?: string
-  dueDate?: string
-  isCompleted?: boolean
-  priority?: 'low' | 'medium' | 'high' | 'urgent'
-  coverImage?: string
+  title: string
+  description: string
+  order?: number
 }
-
-export interface MoveCardRequest {
-  listId: string
-  position: number
-}
-
-export interface AssignCardMemberRequest {
-  userId: string
-}
-

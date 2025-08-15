@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { CardForList } from '@/api/types/list'
-import CardDetailDialog from './CardDetailDialog.vue'
+  import type { CardForList } from '@/api/types/list'
+  import CardDetailDialog from './CardDetailDialog.vue'
 
-const props = defineProps<{
-  card: CardForList
-}>()
+  const props = defineProps<{
+    card: CardForList
+  }>()
 
-const open = ref(false)
+  const open = ref(false)
 </script>
 
 <template>
@@ -18,14 +18,6 @@ const open = ref(false)
       <div class="text-sm font-medium leading-snug">{{ props.card.title }}</div>
       <div v-if="props.card.description" class="text-xs text-muted-foreground line-clamp-2">
         {{ props.card.description }}
-      </div>
-      <div class="flex items-center gap-2">
-        <span
-          v-if="props.card.description"
-          class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium bg-muted text-muted-foreground"
-        >
-          {{ props.card.description }}
-        </span>
       </div>
     </div>
   </div>

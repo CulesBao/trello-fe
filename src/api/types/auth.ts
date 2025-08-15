@@ -5,15 +5,6 @@ export interface LoginRequest {
   rememberMe?: boolean
 }
 
-export interface RegisterRequest {
-  email: string
-  username: string
-  firstName: string
-  lastName: string
-  password: string
-  confirmPassword: string
-}
-
 export interface AuthResponse {
   user: {
     id: string

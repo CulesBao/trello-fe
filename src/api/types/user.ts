@@ -21,15 +21,3 @@ export interface UserProfile {
   createdAt?: Date
   updatedAt?: Date
 }
-
-export interface UpdateUserRequest {
-  username?: string
-  firstName?: string
-  lastName?: string
-  avatar?: string
-  bio?: string
-  phone?: string
-  timezone?: string
-  isActive?: boolean
-  role?: 'admin' | 'user' | 'moderator'
-}

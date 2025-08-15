@@ -24,10 +24,10 @@
     class="group flex w-full justify-between gap-4 rounded-xl border border-border/60 bg-background/50 px-4 py-3 text-left shadow-sm transition-colors hover:bg-muted/40 dark:border-border/30"
   >
     <div class="flex flex-row justify-between items-center gap-3">
-        <AvatarInitials
-          :name="props.member.name"
-          class="h-12 w-12 text-sm font-medium bg-muted/50 ring-1 ring-border/50"
-          />
+      <AvatarInitials
+        :name="props.member.name"
+        class="h-12 w-12 text-sm font-medium bg-muted/50 ring-1 ring-border/50"
+      />
       <div class="flex min-w-0 flex-col gap-1">
         <h3
           class="text-sm font-semibold leading-tight text-foreground truncate"

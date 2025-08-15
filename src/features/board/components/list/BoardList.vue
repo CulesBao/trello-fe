@@ -36,7 +36,13 @@
       <div v-if="adding" class="px-1 py-1">
         <CreateCardForm
           :list-id="props.list.id"
-          @create="async (payload) => { await CardService.createCard(payload); adding = false; emit('changed') }"
+          @create="
+            async (payload) => {
+              await CardService.createCard(payload)
+              adding = false
+              emit('changed')
+            }
+          "
           @cancel="adding = false"
         />
       </div>

@@ -10,7 +10,7 @@
   const props = withDefaults(
     defineProps<{
       admins?: Member[]
-  members?: Member[]
+      members?: Member[]
     }>(),
     {
       admins: () => [],

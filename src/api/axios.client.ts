@@ -7,7 +7,14 @@ const axiosClient = axios.create({
 })
 
 axiosClient.interceptors.request.use((config) => {
-  config.headers['Content-Type'] = 'application/json'
+  // Only set JSON content type when not sending FormData. Let the browser set multipart boundaries.
+  const isFormData = typeof FormData !== 'undefined' && config.data instanceof FormData
+  if (!isFormData) {
+    config.headers['Content-Type'] = config.headers['Content-Type'] || 'application/json'
+  } else {
+    // Ensure we don't override the browser-provided multipart Content-Type with boundary
+    delete (config.headers as any)['Content-Type']
+  }
   config.headers['Access-Control-Allow-Origin'] = '*'
   // X-CSRFToken: FGWp2aF83aGv8UNqTUzKom4RwMfsYo5kSqzdHahcsi495vgsyYnzBEgY9OohXcWr
 
