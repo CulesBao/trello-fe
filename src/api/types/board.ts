@@ -1,4 +1,5 @@
 import type { BaseEntity } from './common'
+import type { List } from './list'
 
 // Board Types
 export interface Board extends BaseEntity {
@@ -14,10 +15,6 @@ interface User {
   name: string
   email: string
 }
-export interface List {
-  id: number
-  name: string
-}
 export interface CreateBoardRequest {
   name: string
   description?: string
@@ -30,5 +27,5 @@ export interface UpdateBoardRequest {
 }
 
 export interface AddBoardMemberRequest {
-  userId: string
+  email: string
 }

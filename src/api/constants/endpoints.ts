@@ -37,7 +37,6 @@ export const API_ENDPOINTS = {
     CREATE: '/lists',
     UPDATE: (id: string) => `/lists/${id}`,
     DELETE: (id: string) => `/lists/${id}`,
-    BY_BOARD: (boardId: string) => `/boards/${boardId}/lists`,
   },
 
   // Card Management
@@ -69,13 +68,6 @@ export const API_ENDPOINTS = {
     UPLOAD: '/files/upload',
     DOWNLOAD: (id: string) => `/files/${id}/download`,
     DELETE: (id: string) => `/files/${id}`,
-  },
-
-  // Activity/History
-  ACTIVITIES: {
-    LIST: '/activities',
-    BY_BOARD: (boardId: string) => `/boards/${boardId}/activities`,
-    BY_CARD: (cardId: string) => `/cards/${cardId}/activities`,
   },
 
   WORKSPACES: {

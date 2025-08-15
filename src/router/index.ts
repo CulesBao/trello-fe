@@ -50,6 +50,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/b/:id/:name',
+      name: 'Board',
+      component: () => import('@/features/board/views/BoardView.vue'),
+      meta: {
+        title: 'Board',
+      },
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'error',
       component: () => import('../views/Error.vue'),

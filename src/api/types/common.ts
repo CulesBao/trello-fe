@@ -14,7 +14,7 @@ export interface ApiError {
 
 // Base Entity
 export interface BaseEntity {
-  id: string
-  createdAt: string
-  updatedAt: string
+  id: number
+  createdAt: Date
+  updatedAt: Date
 }

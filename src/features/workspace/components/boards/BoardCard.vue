@@ -1,17 +1,21 @@
 <script setup lang="ts">
   import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-  type BoardItem = { id: number | string; name: string; description?: string }
+  type BoardItem = { id: number; name: string; description?: string }
 
   defineProps<Props>()
   interface Props {
     board: BoardItem
   }
   defineOptions({ name: 'BoardCard' })
+  const router = useRouter()
+  const onBoardClick = (id: number, name: string) => {
+    router.push(`/b/${id}/${encodeURIComponent(name)}`)
+  }
 </script>
 
 <template>
-  <Card
+  <Card @click="onBoardClick(board.id, board.name)"
     class="cursor-pointer hover:shadow-lg transition-all duration-200 min-h-[140px] border hover:border-primary/50"
   >
     <CardHeader class="pb-3">

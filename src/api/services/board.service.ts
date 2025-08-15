@@ -64,14 +64,6 @@ export class BoardService {
   }
 
   /**
-   * Get board activities
-   */
-  static async getBoardActivities(boardId: string): Promise<Activity[]> {
-    const response = await $get<ApiResponse<Activity[]>>(API_ENDPOINTS.ACTIVITIES.BY_BOARD(boardId))
-    return response.data.data
-  }
-
-  /**
    * Toggle favorite board
    */
   static async toggleFavoriteBoard(id: string): Promise<Board> {

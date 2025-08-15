@@ -14,11 +14,6 @@
     createBoardWorkspaceId.value = workspaceId
     createBoardOpen.value = true
   }
-
-  const handleBoardClick = (board: { id: string | number; name: string; description?: string }) => {
-    console.log('Navigate to board:', board.id)
-    // TODO: Navigate to board detail page
-  }
 </script>
 
 <template>
@@ -34,7 +29,6 @@
         :key="workspace.id"
         :workspace="workspace"
         @create-board="handleCreateBoard"
-        @board-click="handleBoardClick"
       />
     </div>
 

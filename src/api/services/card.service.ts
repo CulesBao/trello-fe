@@ -8,7 +8,7 @@ import type {
   AssignCardMemberRequest,
 } from '../types/card'
 import type { ApiResponse } from '../types/common'
-import type { MiscComment, Activity, FileUploadResponse } from '../types/misc'
+import type { MiscComment, FileUploadResponse } from '../types/misc'
 
 export class CardService {
   /**
@@ -88,17 +88,6 @@ export class CardService {
     return response.data.data
   }
 
-  /**
-   * Lấy danh sách hoạt động của card
-   */
-  static async getCardActivities(cardId: string): Promise<Activity[]> {
-    const response = await $get<ApiResponse<Activity[]>>(API_ENDPOINTS.ACTIVITIES.BY_CARD(cardId))
-    return response.data.data
-  }
-
-  /**
-   * Upload file đính kèm cho card
-   */
   static async uploadCardAttachment(cardId: string, file: File): Promise<FileUploadResponse> {
     const formData = new FormData()
     formData.append('file', file)
